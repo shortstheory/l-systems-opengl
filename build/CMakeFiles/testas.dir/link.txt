@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/testas.dir/main.cpp.o CMakeFiles/testas.dir/glad.c.o  -o testas -rdynamic -lGLU -lGL /usr/local/lib/libglfw3.a -lrt -lm -ldl -lX11 -lpthread -lXrandr -lXinerama -lXxf86vm -lXcursor 

@@ -1,0 +1,3 @@
+/home/nic/original-projects/open-gl/build/CMakeFiles/edit_cache.dir
+/home/nic/original-projects/open-gl/build/CMakeFiles/rebuild_cache.dir
+/home/nic/original-projects/open-gl/build/CMakeFiles/testas.dir
