@@ -22,7 +22,7 @@ void drawPixel(GLfloat x, GLfloat y)
     glDisable(GL_POINT_SMOOTH); // stop the smoothing to make the points circular
 }
 
-void drawLine(GLfloat start_x, GLfloat start_y, GLfloat end_x, GLfloat end_y)
+void drawLine(GLfloat start_x, GLfloat start_y, GLfloat end_x, GLfloat end_y) // we have to take care of too many cases :P
 {
     if (start_x > end_x) {
         std::swap(start_x, end_x);
@@ -31,13 +31,14 @@ void drawLine(GLfloat start_x, GLfloat start_y, GLfloat end_x, GLfloat end_y)
     int dx = end_x - start_x;
     int dy = end_y - start_y;
 
+    //when line is steeper than 1
     if (abs(dy) > abs(dx)) {
-        if (dy > 0) {
+        if (dy > 0) { //when line has m>1 && m<=infinity
             int p = -2*dx + dy; //initial delta
             int northDelta = -2*dx;
             int northEastDelta = 2*dy - 2*dx;
             for (int x = start_x, y = start_y; y<= end_y; y++) {
-                if (p < 0) {
+                if (p > 0) {
                     p = p + northDelta;
                 } else {
                     p = p + northEastDelta;
@@ -45,22 +46,23 @@ void drawLine(GLfloat start_x, GLfloat start_y, GLfloat end_x, GLfloat end_y)
                 }
                 drawPixel(x, y);
             }
-        } else {
-            // int p = 2*dx - dy; //initial delta
-            // int northDelta = 2*dx;
-            // int northEastDelta = 2*(dy - dx);
-            // for (int x = start_x, y = start_y; y<= end_y; y++) {
-            //     if (p < 0) {
-            //         p = p + northDelta;
-            //     } else {
-            //         p = p + northEastDelta;
-            //         x++;
-            //     }
-            //     drawPixel(x, y);
+        } else { //when it spills over to second quadrant but still has abs(m) > 1
+            int p = 2*dx - dy; //initial delta
+            int southDelta = 2*dx;
+            int southEastDelta = 2*(dy + dx);
+            for (int x = start_x, y = start_y; y >= end_y; y--) {
+                if (p < 0) {
+                    p = p + southDelta;
+                } else {
+                    p = p + southEastDelta;
+                    x++;
+                }
+                drawPixel(x, y);
+            }
         }
     } else {
         if (dy > 0) {
-            int p = 2*dy - dx; //initial delta
+            int p = 2*dy - dx;
             int eastDelta = 2*dy;
             int northEastDelta = 2*(dy - dx);
             for (int x = start_x, y = start_y; x<= end_x; x++) {
@@ -168,10 +170,10 @@ int main( void )
     while (!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        // bresenham(200, 100, 400, 300);
-        drawLine(200, 200, 200, 600);
-//        drawLine(200, 200, 200, 500);
+        // drawLine(200, 200, 200, 600);
+        // drawLine(200, 200, 300, 500);
 
+        drawLine(300, 600, 350, 200);
         // drawLine(200, 200, 400, 200);
         //
         // drawLine(200, 200, 400, 300);
