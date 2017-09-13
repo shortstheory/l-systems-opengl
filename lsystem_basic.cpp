@@ -161,17 +161,12 @@ void drawPattern(string sentence)
             pair<int, int> temp = drawVector(x0, y0, len, rotation);
             x0 = temp.first;
             y0 = temp.second;
-
-            // y0 += len;
         } else if (current == '+') {
-            // rotate(angle);
             rotation -= angle;
         } else if (current == '-') {
-            // rotate(-angle);
             rotation += angle;
         } else if (current == '[') {
             v.push(make_tuple(x0, y0, rotation));
-            // push();
         } else if (current == ']') {
             tuple<int, int, float> temp = v.top();
             v.pop();
