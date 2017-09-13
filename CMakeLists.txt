@@ -1,11 +1,14 @@
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-project(testas)
-add_executable(testas main.cpp glad.c)
+set (CMAKE_CXX_STANDARD 11)
+project(opengl_assignment)
+add_executable(testas main.cpp)
+add_executable(lsystem lsystem_basic.cpp)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 # find_package(GLUT REQUIRED)
 include_directories( ${OPENGL_INCLUDE_DIRS})
 
 target_link_libraries(testas ${OPENGL_LIBRARIES} glfw)
+target_link_libraries(lsystem ${OPENGL_LIBRARIES} glfw)

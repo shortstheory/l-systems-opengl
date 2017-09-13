@@ -14,8 +14,6 @@ using namespace std;
 #define HEIGHT 600
 #define PI 3.1415
 
-float rotation = PI / 2;
-float angle = (PI / 180) * 22.5;
 char sentence[] = "X";
 string rule = "F[+F]F[-F]F";
 // string rule = "FF+[+F-F-F]-[-F+F+F]";
@@ -247,6 +245,9 @@ void drawCircle(int x0, int y0, int radius)
 
 void drawPattern(string sentence)
 {
+    float rotation = PI / 2;
+    float angle = (PI / 180) * 22.5;
+
   // translate(WIDTH/2, 0);
   int x0 = WIDTH / 2;
   int y0 = 0;
@@ -295,12 +296,14 @@ void drawPattern(string sentence)
   }
 }
 
+string generatedString;
+
 void generateString(string sentence, int depth)
 {
   if(depth == 0)
   {
     cout<<sentence;
-    drawPattern(sentence);
+    generatedString = sentence;
     return;
   }
 
@@ -335,8 +338,6 @@ int main()
       fprintf(stderr, "Error initializing GLFW\n");
       return -1;
   }
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
   GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "OpenGL Example", NULL, NULL);
   if(!window)
@@ -349,18 +350,19 @@ int main()
   glViewport(0.0f, 0.0f, WIDTH, HEIGHT);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-
   glOrtho(0, WIDTH, 0, HEIGHT, 0, 1);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  glClear( GL_COLOR_BUFFER_BIT );
-  glfwSwapInterval(0);
+  // glClear( GL_COLOR_BUFFER_BIT );
+  // glfwSwapInterval(0);
 
   generateString(sentence, 5);
 
 
   while(!glfwWindowShouldClose(window))
   {
+    glClear(GL_COLOR_BUFFER_BIT);
+    drawPattern(generatedString);
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
