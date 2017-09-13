@@ -24,12 +24,12 @@ stack<tuple<int, int, float>> v;
 
 void drawPixel(int x, int y)
 {
-  GLfloat vertex[] = {(GLfloat) x, (GLfloat) y};
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glPointSize(1);
-  glVertexPointer(2, GL_FLOAT, 0, vertex);
-  glDrawArrays(GL_POINTS, 0, 1);
-  glDisableClientState(GL_VERTEX_ARRAY);
+    GLfloat vertex[] = {(GLfloat) x, (GLfloat) y};
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glPointSize(1);
+    glVertexPointer(2, GL_FLOAT, 0, vertex);
+    glDrawArrays(GL_POINTS, 0, 1);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 // void drawLine_error(int x0, int y0, int x1, int y1)
@@ -195,52 +195,48 @@ void drawLine(int start_x, int start_y, int end_x, int end_y) // we have to take
 
 pair<int, int> drawVector(int x0, int y0, int len, float angle)
 {
-  int a = x0 + (int) (len * cos(angle));
-  int b = y0 + (int) (len * sin(angle));
-  // printf("%d %d\n", (int) (len * cos(angle)), (int) (len * sin(angle)));
-  // printf("%d %d\n", a, b);
-  drawLine(x0, y0, a, b);
-  return make_pair(a, b);
+    int a = x0 + (int) (len * cos(angle));
+    int b = y0 + (int) (len * sin(angle));
+    // printf("%d %d\n", (int) (len * cos(angle)), (int) (len * sin(angle)));
+    // printf("%d %d\n", a, b);
+    drawLine(x0, y0, a, b);
+    return make_pair(a, b);
 }
 
 void drawCirclePixels(int x0, int y0, int x, int y)
 {
-  drawPixel(x + x0, y + y0);
-  drawPixel(-x + x0, y + y0);
-  drawPixel(x + x0, -y + y0);
-  drawPixel(-x + x0, -y + y0);
-  drawPixel(y + x0, x + y0);
-  drawPixel(-y + x0, x + y0);
-  drawPixel(y + x0, -x + y0);
-  drawPixel(-y + x0, -x + y0);
+    drawPixel(x + x0, y + y0);
+    drawPixel(-x + x0, y + y0);
+    drawPixel(x + x0, -y + y0);
+    drawPixel(-x + x0, -y + y0);
+    drawPixel(y + x0, x + y0);
+    drawPixel(-y + x0, x + y0);
+    drawPixel(y + x0, -x + y0);
+    drawPixel(-y + x0, -x + y0);
 }
 
 void drawCircle(int x0, int y0, int radius)
 {
-  int x = 0;
-  int y = radius;
-  int d = 1 - radius;
-  int deltaE = 3;
-  int deltaSE = -2 * radius + 5;
-  drawCirclePixels(x0, y0, x, y);
-  while(y > x)
-  {
-    if (d < 0) // E pixel
-    {
-      d += deltaE;
-      deltaE += 2;
-      deltaSE += 2;
-    }
-    else // SE pixel
-    {
-      d += deltaSE;
-      deltaE += 2;
-      deltaSE += 4;
-      y--;
-    }
-    x++;
+    int x = 0;
+    int y = radius;
+    int d = 1 - radius;
+    int deltaE = 3;
+    int deltaSE = -2 * radius + 5;
     drawCirclePixels(x0, y0, x, y);
-  }
+    while(y > x) {
+        if (d < 0) { // E pixel
+            d += deltaE;
+            deltaE += 2;
+            deltaSE += 2;
+        } else { // SE pixel
+            d += deltaSE;
+            deltaE += 2;
+            deltaSE += 4;
+            y--;
+        }
+        x++;
+        drawCirclePixels(x0, y0, x, y);
+    }
 }
 
 void drawPattern(string sentence)
@@ -248,125 +244,108 @@ void drawPattern(string sentence)
     float rotation = PI / 2;
     float angle = (PI / 180) * 22.5;
 
-  // translate(WIDTH/2, 0);
-  int x0 = WIDTH / 2;
-  int y0 = 0;
+    // translate(WIDTH/2, 0);
+    int x0 = WIDTH / 2;
+    int y0 = 0;
 
-  for (int i = 0; i < sentence.length(); i++)
-  {
-    char current = sentence[i];
+    for (int i = 0; i < sentence.length(); i++) {
+        char current = sentence[i];
 
-    if (current == 'F')
-    {
-      pair<int, int> temp = drawVector(x0, y0, len, rotation);
-      x0 = temp.first;
-      y0 = temp.second;
-      // drawLine(x0, y0, x0 + 0, y0 + len);
-      // translate(0, len);
+        if (current == 'F') {
+            pair<int, int> temp = drawVector(x0, y0, len, rotation);
+            x0 = temp.first;
+            y0 = temp.second;
+            // drawLine(x0, y0, x0 + 0, y0 + len);
+            // translate(0, len);
 
-      // y0 += len;
-    }
-    else if (current == '+')
-    {
-      // rotate(angle);
-      rotation -= angle;
-    }
-    else if (current == '-')
-    {
-      // rotate(-angle);
-      rotation += angle;
-    }
-    else if (current == '[')
-    {
-      v.push(make_tuple(x0, y0, rotation));
-      // push();
-    }
-    else if (current == ']')
-    {
-      tuple<int, int, float> temp = v.top();
-      v.pop();
-      x0 = get<0>(temp);
-      y0 = get<1>(temp);
-      rotation = get<2>(temp);
-      // x0 = temp.first;
-      // y0 = temp.second;
-      // pop();
-    }
+            // y0 += len;
+        } else if (current == '+') {
+            // rotate(angle);
+            rotation -= angle;
+        } else if (current == '-') {
+            // rotate(-angle);
+            rotation += angle;
+        } else if (current == '[') {
+            v.push(make_tuple(x0, y0, rotation));
+            // push();
+        } else if (current == ']') {
+            tuple<int, int, float> temp = v.top();
+            v.pop();
+            x0 = get<0>(temp);
+            y0 = get<1>(temp);
+            rotation = get<2>(temp);
+            // x0 = temp.first;
+            // y0 = temp.second;
+            // pop();
+        }
 
-  }
+    }
 }
 
 string generatedString;
 
 void generateString(string sentence, int depth)
 {
-  if(depth == 0)
-  {
-    cout<<sentence;
-    generatedString = sentence;
-    return;
-  }
+    if(depth == 0) {
+        cout<<sentence;
+        generatedString = sentence;
+        return;
+    }
 
-  len *= 0.5;
-  string nextSentence;
-  // char nextSentence[1000000];
-  // strcpy(nextSentence, "");
-  // cout<<sentence.length()<<endl;
-  for (int i = 0; i < sentence.length(); i++)
-  {
-    if (sentence[i] == 'X')
-    {
-      nextSentence += "F-[[X]+X]+F[+FX]-X";
-      continue;
+    len *= 0.5;
+    string nextSentence;
+    // char nextSentence[1000000];
+    // strcpy(nextSentence, "");
+    // cout<<sentence.length()<<endl;
+    for (int i = 0; i < sentence.length(); i++) {
+        if (sentence[i] == 'X') {
+            nextSentence += "F-[[X]+X]+F[+FX]-X";
+            continue;
+        }
+        if(sentence[i] == 'F') {
+            nextSentence += "FF";
+            continue;
+        }
+        nextSentence += sentence[i];
     }
-    if(sentence[i] == 'F')
-    {
-      nextSentence += "FF";
-      continue;
-    }
-    nextSentence += sentence[i];
-  }
-  cout<<nextSentence<<depth<<endl;
-  generateString(nextSentence, depth - 1);
+    cout<<nextSentence<<depth<<endl;
+    generateString(nextSentence, depth - 1);
 }
 
 
 int main()
 {
-  if(glfwInit() == false)
-  {
-      fprintf(stderr, "Error initializing GLFW\n");
-      return -1;
-  }
+    if(glfwInit() == false) {
+        fprintf(stderr, "Error initializing GLFW\n");
+        return -1;
+    }
 
-  GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "OpenGL Example", NULL, NULL);
-  if(!window)
-  {
-      glfwTerminate();
-      fprintf(stderr, "Error while creating a window\n");
-      return -1;
-  }
-  glfwMakeContextCurrent(window);
-  glViewport(0.0f, 0.0f, WIDTH, HEIGHT);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  glOrtho(0, WIDTH, 0, HEIGHT, 0, 1);
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  // glClear( GL_COLOR_BUFFER_BIT );
-  // glfwSwapInterval(0);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "OpenGL Example", NULL, NULL);
+    if(!window) {
+        glfwTerminate();
+        fprintf(stderr, "Error while creating a window\n");
+        return -1;
+    }
+    glfwMakeContextCurrent(window);
+    glViewport(0.0f, 0.0f, WIDTH, HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, WIDTH, 0, HEIGHT, 0, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    // glClear( GL_COLOR_BUFFER_BIT );
+    // glfwSwapInterval(0);
 
-  generateString(sentence, 5);
+    generateString(sentence, 5);
 
 
-  while(!glfwWindowShouldClose(window))
-  {
-    glClear(GL_COLOR_BUFFER_BIT);
-    drawPattern(generatedString);
-    glfwSwapBuffers(window);
-    glfwPollEvents();
-  }
-  glfwDestroyWindow(window);
-  glfwTerminate();
-  return 0;
+    while(!glfwWindowShouldClose(window)) {
+        glClear(GL_COLOR_BUFFER_BIT);
+        drawPattern(generatedString);
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    return 0;
 }
