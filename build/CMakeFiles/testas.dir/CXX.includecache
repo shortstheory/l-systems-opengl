@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/nic/original-projects/open-gl/main.cpp
+/home/pranavasty/Projects/Computer Graphics/Assignment1/main.cpp
 GLFW/glfw3.h
 -
 vector

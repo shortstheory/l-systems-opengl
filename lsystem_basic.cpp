@@ -7,6 +7,7 @@
 #include <stack>
 #include <iostream>
 #include <math.h>
+#include <time.h>
 
 using namespace std;
 
@@ -26,6 +27,12 @@ void drawPixel(int x, int y)
 {
   GLfloat vertex[] = {(GLfloat) x, (GLfloat) y};
   glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_COLOR_ARRAY);
+  GLfloat red = 1.0f; //(float)(rand()%100) / (float)100;
+  GLfloat green = 1.0f;
+  GLfloat blue = 0.0f;
+  GLfloat color[] = {red, green, blue, 0.0f};
+  glColorPointer(4, GL_FLOAT, 0, color);
   glPointSize(1);
   glVertexPointer(2, GL_FLOAT, 0, vertex);
   glDrawArrays(GL_POINTS, 0, 1);
@@ -333,6 +340,8 @@ void generateString(string sentence, int depth)
 
 int main()
 {
+  srand(time(NULL));
+
   if(glfwInit() == false)
   {
       fprintf(stderr, "Error initializing GLFW\n");
