@@ -141,16 +141,14 @@ int main( void )
     GLFWwindow *window;
 
     // Initialize the library
-    if (!glfwInit())
-    {
+    if (!glfwInit()) {
         return -1;
     }
 
     // Create a windowed mode window and its OpenGL context
     window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World", NULL, NULL);
 
-    if (!window)
-    {
+    if (!window) {
         glfwTerminate();
         return -1;
     }
@@ -167,8 +165,7 @@ int main( void )
 
 
     // Loop until the user closes the window
-    while (!glfwWindowShouldClose(window))
-    {
+    while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
         // drawLine(200, 200, 200, 600);
         // drawLine(200, 200, 300, 500);
