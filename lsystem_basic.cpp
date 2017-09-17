@@ -59,6 +59,28 @@ class Graphics
         drawPixel(-y + x0, -x + y0, thickness, color);
     }
 
+    void drawLeaf(int origin_x, int origin_y, float angle = 30.0)
+    {
+        int xDelta = 5;
+        int yDelta = 30;
+        int rad = 12;
+
+        float radian = PI/180*angle;
+
+        drawCircle(rad, origin_x, origin_y);
+
+        float piDiv = 4;
+        // //top
+        drawLine(origin_x - (rad)*cos(radian), origin_y + rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
+        drawLine(origin_x + rad*cos(radian), origin_y - rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
+
+        drawLine(origin_x - (rad)*cos(radian+PI/piDiv), origin_y + rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
+        drawLine(origin_x + rad*cos(radian+PI/piDiv), origin_y - rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
+
+        drawLine(origin_x - (rad)*cos(radian-PI/piDiv), origin_y + rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
+        drawLine(origin_x + rad*cos(radian-PI/piDiv), origin_y - rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
+    }
+
     public:
         void setThickness(int thickness)
         {

@@ -4,15 +4,28 @@
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+#include <tuple>
 
+#define PI 3.14159265
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
 GLfloat pointVertex[1000][2];
-
+GLfloat r = 0.5;
+GLfloat g = 0.5;
+GLfloat b = 0.5;
+// const std::tuple<GLfloat, GLfloat, GLfloat> myTuple = std::make_tuple<r,g,b>;
 void drawPixel(GLfloat x, GLfloat y)
 {
     GLfloat pointVertex[] = {x, y};
+
+    GLfloat red = 0;
+    GLfloat green = 1;
+    GLfloat blue =0;
+    GLfloat color_vector[] = {red, green, blue};
+
+    glColorPointer(3, GL_FLOAT, 0, color_vector);
+
     glEnable(GL_POINT_SMOOTH); // make the point circular
     glEnableClientState(GL_VERTEX_ARRAY); // tell OpenGL that you're using a vertex array for fixed-function attribute
     glPointSize(2); // must be added before glDrawArrays is called
@@ -136,6 +149,28 @@ void drawCircle(int radius, int origin_x, int origin_y)
     }
 }
 
+void drawLeaf(int origin_x, int origin_y, float angle = 30.0)
+{
+    int xDelta = 5;
+    int yDelta = 40;
+    int rad = 20;
+
+    float radian = PI/180*angle;
+
+    drawCircle(rad, origin_x, origin_y);
+
+    float piDiv = 2;
+    // //top
+    drawLine(origin_x - (rad)*cos(radian), origin_y + rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
+    drawLine(origin_x + rad*cos(radian), origin_y - rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
+
+    drawLine(origin_x - (rad)*cos(radian+PI/piDiv), origin_y + rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
+    drawLine(origin_x + rad*cos(radian+PI/piDiv), origin_y - rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
+
+    drawLine(origin_x - (rad)*cos(radian-PI/piDiv), origin_y + rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
+    drawLine(origin_x + rad*cos(radian-PI/piDiv), origin_y - rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
+}
+
 int main( void )
 {
     GLFWwindow *window;
@@ -169,18 +204,19 @@ int main( void )
         glClear(GL_COLOR_BUFFER_BIT);
         // drawLine(200, 200, 200, 600);
         // drawLine(200, 200, 300, 500);
+        //
+        // drawLine(300, 600, 350, 200);
+        // // drawLine(200, 200, 400, 200);
+        // //
+        // // drawLine(200, 200, 400, 300);
+        // // drawLine(200, 200, 400, 500);
+        // //
+        // // drawLine(0, 400, 200, 200);
+        // //
+        // drawPixel(300, 400);
+        // drawCircle(200, 300, 400);
 
-        drawLine(300, 600, 350, 200);
-        // drawLine(200, 200, 400, 200);
-        //
-        // drawLine(200, 200, 400, 300);
-        // drawLine(200, 200, 400, 500);
-        //
-        // drawLine(0, 400, 200, 200);
-        //
-        drawPixel(300, 400);
-        drawCircle(200, 300, 400);
-
+        drawLeaf(400, 350);
         // Swap front and back buffers
         glfwSwapBuffers( window );
 

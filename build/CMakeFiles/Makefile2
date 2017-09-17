@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/pranavasty/Projects/Computer Graphics/Assignment1"
+CMAKE_SOURCE_DIR = /home/nic/original-projects/open-gl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/pranavasty/Projects/Computer Graphics/Assignment1/build"
+CMAKE_BINARY_DIR = /home/nic/original-projects/open-gl/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/lsystem.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = "/home/pranavasty/Projects/Computer Graphics/Assignment1/buil
 CMakeFiles/lsystem.dir/all:
 	$(MAKE) -f CMakeFiles/lsystem.dir/build.make CMakeFiles/lsystem.dir/depend
 	$(MAKE) -f CMakeFiles/lsystem.dir/build.make CMakeFiles/lsystem.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles" --progress-num=1,2 "Built target lsystem"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nic/original-projects/open-gl/build/CMakeFiles --progress-num=1,2 "Built target lsystem"
 .PHONY : CMakeFiles/lsystem.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/lsystem.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/lsystem.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nic/original-projects/open-gl/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/lsystem.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nic/original-projects/open-gl/build/CMakeFiles 0
 .PHONY : CMakeFiles/lsystem.dir/rule
 
 # Convenience name for target.
@@ -103,7 +103,7 @@ clean: CMakeFiles/lsystem.dir/clean
 CMakeFiles/testas.dir/all:
 	$(MAKE) -f CMakeFiles/testas.dir/build.make CMakeFiles/testas.dir/depend
 	$(MAKE) -f CMakeFiles/testas.dir/build.make CMakeFiles/testas.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles" --progress-num=3,4 "Built target testas"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nic/original-projects/open-gl/build/CMakeFiles --progress-num=3,4 "Built target testas"
 .PHONY : CMakeFiles/testas.dir/all
 
 # Include target in all.
@@ -113,9 +113,9 @@ all: CMakeFiles/testas.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/testas.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nic/original-projects/open-gl/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/testas.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nic/original-projects/open-gl/build/CMakeFiles 0
 .PHONY : CMakeFiles/testas.dir/rule
 
 # Convenience name for target.
