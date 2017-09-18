@@ -13,12 +13,12 @@
 using namespace std;
 
 #define WIDTH 800
-#define HEIGHT 600
+#define HEIGHT 900
 #define PI 3.1415
 
 char sentence[] = "X";
 string rule = "F[+F]F[-F]F";
-tuple<GLfloat, GLfloat, GLfloat> color = make_tuple(1, 1, 1);
+tuple<GLfloat, GLfloat, GLfloat, GLfloat> color = make_tuple(1, 1, 1, 1);
 // string rule = "FF+[+F-F-F]-[-F+F+F]";
 int len = 200;
 // int thickness = 1;
@@ -29,9 +29,9 @@ stack<tuple<int, int, float>> v;
 class Graphics
 {
     int thickness;
-    tuple<GLfloat, GLfloat, GLfloat> color = make_tuple(1, 1, 1);
+    tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;// = make_tuple(1, 1, 1, 1);
 
-    void drawPixel(int x, int y, int thickness, tuple<GLfloat, GLfloat, GLfloat> color)
+    void drawPixel(int x, int y, int thickness, tuple<GLfloat, GLfloat, GLfloat, GLfloat> color)
     {
         GLfloat vertex[] = {(GLfloat) x, (GLfloat) y};
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -39,8 +39,9 @@ class Graphics
         GLfloat red = get<0>(color);
         GLfloat green = get<1>(color);
         GLfloat blue = get<2>(color);
-        GLfloat color_vector[] = {red, green, blue};
-        glColorPointer(3, GL_FLOAT, 0, color_vector);
+        GLfloat alpha = get<3>(color);
+        GLfloat color_vector[] = {red, green, blue, alpha};
+        glColorPointer(4, GL_FLOAT, 0, color_vector);
         glPointSize(thickness);
         glVertexPointer(2, GL_FLOAT, 0, vertex);
         glDrawArrays(GL_POINTS, 0, 1);
@@ -59,27 +60,6 @@ class Graphics
         drawPixel(-y + x0, -x + y0, thickness, color);
     }
 
-    void drawLeaf(int origin_x, int origin_y, float angle = 30.0)
-    {
-        int xDelta = 5;
-        int yDelta = 30;
-        int rad = 12;
-
-        float radian = PI/180*angle;
-
-        drawCircle(rad, origin_x, origin_y);
-
-        float piDiv = 4;
-        // //top
-        drawLine(origin_x - (rad)*cos(radian), origin_y + rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
-        drawLine(origin_x + rad*cos(radian), origin_y - rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
-
-        drawLine(origin_x - (rad)*cos(radian+PI/piDiv), origin_y + rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
-        drawLine(origin_x + rad*cos(radian+PI/piDiv), origin_y - rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
-
-        drawLine(origin_x - (rad)*cos(radian-PI/piDiv), origin_y + rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
-        drawLine(origin_x + rad*cos(radian-PI/piDiv), origin_y - rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
-    }
 
     public:
         void setThickness(int thickness)
@@ -87,7 +67,7 @@ class Graphics
             this -> thickness = thickness;
         }
 
-        void setColor(tuple<GLfloat, GLfloat, GLfloat> color)
+        void setColor(tuple<GLfloat, GLfloat, GLfloat, GLfloat> color)
         {
             this -> color = color;
         }
@@ -200,17 +180,19 @@ class Turtle
     int len;
     float rotation;
     int x, y;
-    tuple<GLfloat, GLfloat, GLfloat> color;
+    tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;
     stack<tuple<int, int, float>> states;
 
     Graphics * graphics = new Graphics();
 
     public: Turtle()
     {
-        thickness = 5;
+        thickness = 20;
         len = 200/32;
         rotation = PI / 2;
-        color = make_tuple(1, 1, 1);
+        color = make_tuple(0.4, 0.2, 0, 1); // brown color
+        graphics -> setColor(color);
+        graphics -> setThickness(thickness);
     }
 
     void changeColor()
@@ -219,7 +201,7 @@ class Turtle
         GLfloat green = (float)(rand()%100) / (float)100;
         GLfloat blue = (float)(rand()%100) / (float)100;
         // cout << red << green << blue;
-        color = make_tuple(red, green, blue);
+        color = make_tuple(red, green, blue, 1);
         graphics -> setColor(color);
     }
 
@@ -271,6 +253,32 @@ class Turtle
         rotation = get<2>(temp);
     }
 
+    void drawLeaf()
+    {
+        int xDelta = len / 2;//5;
+        int yDelta = len * 2;//30;
+        int rad = len;//12;
+
+        float radian = PI/180*rotation;
+
+        graphics -> setColor(make_tuple(0, 1, 0, 0.1));
+
+        graphics -> drawCircle(x, y, rad);
+
+        float piDiv = 4;
+        // //top
+        graphics -> drawLine(x - (rad)*cos(radian), y + rad*sin(radian), x + yDelta*sin(radian), y + yDelta*cos(radian));
+        graphics -> drawLine(x + rad*cos(radian), y - rad*sin(radian), x + yDelta*sin(radian), y + yDelta*cos(radian));
+
+        graphics -> drawLine(x - (rad)*cos(radian+PI/piDiv), y + rad*sin(radian+PI/piDiv), x + yDelta*sin(radian+PI/piDiv), y + yDelta*cos(radian+PI/piDiv));
+        graphics -> drawLine(x + rad*cos(radian+PI/piDiv), y - rad*sin(radian+PI/piDiv), x + yDelta*sin(radian+PI/piDiv), y + yDelta*cos(radian+PI/piDiv));
+
+        graphics -> drawLine(x - (rad)*cos(radian-PI/piDiv), y + rad*sin(radian-PI/piDiv), x + yDelta*sin(radian-PI/piDiv), y + yDelta*cos(radian-PI/piDiv));
+        graphics -> drawLine(x + rad*cos(radian-PI/piDiv), y - rad*sin(radian-PI/piDiv), x + yDelta*sin(radian-PI/piDiv), y + yDelta*cos(radian-PI/piDiv));
+
+        graphics -> setColor(color);
+    }
+
 };
 
 
@@ -305,7 +313,8 @@ void drawPattern(string sentence)
         } else if (current == ']') {
             turtle -> restoreState();
         } else if (current == 'X') {
-            turtle -> changeColor();
+            // turtle -> changeColor();
+            turtle -> drawLeaf();
         }
     }
 }
@@ -362,7 +371,8 @@ int main()
     glOrtho(0, WIDTH, 0, HEIGHT, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    // glClear( GL_COLOR_BUFFER_BIT );
+    glClearColor(1, 1, 1, 1);
+    glClear( GL_COLOR_BUFFER_BIT );
     glfwSwapInterval(0);
     // generateString(sentence, 5);
 

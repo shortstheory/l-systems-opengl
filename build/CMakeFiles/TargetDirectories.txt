@@ -1,4 +1,4 @@
-/home/nic/original-projects/open-gl/build/CMakeFiles/edit_cache.dir
-/home/nic/original-projects/open-gl/build/CMakeFiles/rebuild_cache.dir
-/home/nic/original-projects/open-gl/build/CMakeFiles/lsystem.dir
-/home/nic/original-projects/open-gl/build/CMakeFiles/testas.dir
+/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/edit_cache.dir
+/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/rebuild_cache.dir
+/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/lsystem.dir
+/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/testas.dir
