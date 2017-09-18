@@ -187,7 +187,7 @@ class Turtle
 
     public: Turtle()
     {
-        thickness = 20;
+        thickness = 1;
         len = 200/32;
         rotation = PI / 2;
         color = make_tuple(0.4, 0.2, 0, 1); // brown color
@@ -312,7 +312,7 @@ void drawPattern(string sentence)
             turtle -> saveState();
         } else if (current == ']') {
             turtle -> restoreState();
-        } else if (current == 'X') {
+        } else if (current == 'X') && sentence[i] != '[') {
             // turtle -> changeColor();
             turtle -> drawLeaf();
         }
