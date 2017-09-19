@@ -16,11 +16,9 @@ using namespace std;
 #define HEIGHT 1800
 #define PI 3.1415
 
-char sentence[] = "X";
-string rule = "F[+F]F[-F]F";
 tuple<GLfloat, GLfloat, GLfloat, GLfloat> color = make_tuple(1, 1, 1, 1);
 // string rule = "FF+[+F-F-F]-[-F+F+F]";
-int len = 200;
+// int len = 200;
 // int thickness = 1;
 // F -> FF+[+F-F-F]-[-F+F+F]
 
@@ -28,6 +26,7 @@ stack<tuple<int, int, float>> v;
 
 class Graphics
 {
+private:
     int thickness;
     tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;// = make_tuple(1, 1, 1, 1);
 
@@ -61,138 +60,140 @@ class Graphics
     }
 
 
-    public:
-        void setThickness(int thickness)
-        {
-            this -> thickness = thickness;
-        }
+public:
+    void setThickness(int thickness)
+    {
+        this -> thickness = thickness;
+    }
 
-        void setColor(tuple<GLfloat, GLfloat, GLfloat, GLfloat> color)
-        {
-            this -> color = color;
-        }
+    void setColor(tuple<GLfloat, GLfloat, GLfloat, GLfloat> color)
+    {
+        this -> color = color;
+    }
 
-        void drawLine(int start_x, int start_y, int end_x, int end_y) // we have to take care of too many cases :P
-        {
-            if (start_x > end_x) {
-                std::swap(start_x, end_x);
-                std::swap(start_y, end_y);
+    void drawLine(int start_x, int start_y, int end_x, int end_y) // we have to take care of too many cases :P
+    {
+        if (start_x > end_x) {
+            std::swap(start_x, end_x);
+            std::swap(start_y, end_y);
+        }
+        int dx = end_x - start_x;
+        int dy = end_y - start_y;
+
+        //when line is steeper than 1
+        if (abs(dy) > abs(dx)) {
+            if (dy > 0) { //when line has m>1 && m<=infinity
+                int p = -2*dx + dy; //initial delta
+                int northDelta = -2*dx;
+                int northEastDelta = 2*dy - 2*dx;
+                for (int x = start_x, y = start_y; y<= end_y; y++) {
+                    if (p > 0) {
+                        p = p + northDelta;
+                    } else {
+                        p = p + northEastDelta;
+                        x++;
+                    }
+                    drawPixel(x, y, thickness, color);
+                }
+            } else { //when it spills over to second quadrant but still has abs(m) > 1
+                int p = 2*dx - dy; //initial delta
+                int southDelta = 2*dx;
+                int southEastDelta = 2*(dy + dx);
+                for (int x = start_x, y = start_y; y >= end_y; y--) {
+                    if (p < 0) {
+                        p = p + southDelta;
+                    } else {
+                        p = p + southEastDelta;
+                        x++;
+                    }
+                    drawPixel(x, y, thickness, color);
+                }
             }
-            int dx = end_x - start_x;
-            int dy = end_y - start_y;
-
-            //when line is steeper than 1
-            if (abs(dy) > abs(dx)) {
-                if (dy > 0) { //when line has m>1 && m<=infinity
-                    int p = -2*dx + dy; //initial delta
-                    int northDelta = -2*dx;
-                    int northEastDelta = 2*dy - 2*dx;
-                    for (int x = start_x, y = start_y; y<= end_y; y++) {
-                        if (p > 0) {
-                            p = p + northDelta;
-                        } else {
-                            p = p + northEastDelta;
-                            x++;
-                        }
-                        drawPixel(x, y, thickness, color);
+        } else {
+            if (dy > 0) {
+                int p = 2*dy - dx;
+                int eastDelta = 2*dy;
+                int northEastDelta = 2*(dy - dx);
+                for (int x = start_x, y = start_y; x<= end_x; x++) {
+                    if (p < 0) {
+                        p = p + eastDelta;
+                    } else {
+                        p = p + northEastDelta;
+                        y++;
                     }
-                } else { //when it spills over to second quadrant but still has abs(m) > 1
-                    int p = 2*dx - dy; //initial delta
-                    int southDelta = 2*dx;
-                    int southEastDelta = 2*(dy + dx);
-                    for (int x = start_x, y = start_y; y >= end_y; y--) {
-                        if (p < 0) {
-                            p = p + southDelta;
-                        } else {
-                            p = p + southEastDelta;
-                            x++;
-                        }
-                        drawPixel(x, y, thickness, color);
-                    }
+                    drawPixel(x, y, thickness, color);
                 }
             } else {
-                if (dy > 0) {
-                    int p = 2*dy - dx;
-                    int eastDelta = 2*dy;
-                    int northEastDelta = 2*(dy - dx);
-                    for (int x = start_x, y = start_y; x<= end_x; x++) {
-                        if (p < 0) {
-                            p = p + eastDelta;
-                        } else {
-                            p = p + northEastDelta;
-                            y++;
-                        }
-                        drawPixel(x, y, thickness, color);
+                int p = 2*dy + dx; //initial delta
+                int eastDelta = 2*dy;
+                int southEastDelta = 2*(dy + dx);
+                for (int x = start_x, y = start_y; x<= end_x; x++) {
+                    if (p > 0) {
+                        p = p + eastDelta;
+                    } else {
+                        p = p + southEastDelta;
+                        y--;
                     }
-                } else {
-                    int p = 2*dy + dx; //initial delta
-                    int eastDelta = 2*dy;
-                    int southEastDelta = 2*(dy + dx);
-                    for (int x = start_x, y = start_y; x<= end_x; x++) {
-                        if (p > 0) {
-                            p = p + eastDelta;
-                        } else {
-                            p = p + southEastDelta;
-                            y--;
-                        }
-                        drawPixel(x, y, thickness, color);
-                    }
+                    drawPixel(x, y, thickness, color);
                 }
             }
         }
+    }
 
-        pair<int, int> drawVector(int x0, int y0, int len, float angle)
-        {
-            int a = x0 + (int) (len * cos(angle));
-            int b = y0 + (int) (len * sin(angle));
-            drawLine(x0, y0, a, b);
-            return make_pair(a, b);
-        }
+    pair<int, int> drawVector(int x0, int y0, int len, float angle)
+    {
+        int a = x0 + (int) (len * cos(angle));
+        int b = y0 + (int) (len * sin(angle));
+        drawLine(x0, y0, a, b);
+        return make_pair(a, b);
+    }
 
-        void drawCircle(int x0, int y0, int radius)
-        {
-            int x = 0;
-            int y = radius;
-            int d = 1 - radius;
-            int deltaE = 3;
-            int deltaSE = -2 * radius + 5;
+    void drawCircle(int x0, int y0, int radius)
+    {
+        int x = 0;
+        int y = radius;
+        int d = 1 - radius;
+        int deltaE = 3;
+        int deltaSE = -2 * radius + 5;
+        drawCirclePixels(x0, y0, x, y);
+        while(y > x) {
+            if (d < 0) { // E pixel
+                d += deltaE;
+                deltaE += 2;
+                deltaSE += 2;
+            } else { // SE pixel
+                d += deltaSE;
+                deltaE += 2;
+                deltaSE += 4;
+                y--;
+            }
+            x++;
             drawCirclePixels(x0, y0, x, y);
-            while(y > x) {
-                if (d < 0) { // E pixel
-                    d += deltaE;
-                    deltaE += 2;
-                    deltaSE += 2;
-                } else { // SE pixel
-                    d += deltaSE;
-                    deltaE += 2;
-                    deltaSE += 4;
-                    y--;
-                }
-                x++;
-                drawCirclePixels(x0, y0, x, y);
-            }
         }
+    }
 };
 
 class Turtle
 {
+private:
     int thickness;
     int len;
     float rotation;
     int x, y;
     tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;
     stack<tuple<int, int, float>> states;
-
+    Graphics graphics;
     // Graphics graphics = new Graphics();
 
-    public: Turtle()
+public:
+    Turtle()
     {
         thickness = 1;
         len = 200/32;
         rotation = PI / 2;
         color = make_tuple(0.4, 0.2, 0, 1); // brown color
-        graphics -> setColor(color);
-        graphics -> setThickness(thickness);
+        graphics.setColor(color);
+        graphics.setThickness(thickness);
     }
 
     void changeColor()
@@ -202,13 +203,13 @@ class Turtle
         GLfloat blue = (float)(rand()%100) / (float)100;
         // cout << red << green << blue;
         color = make_tuple(red, green, blue, 1);
-        graphics -> setColor(color);
+        graphics.setColor(color);
     }
 
     void reduceThickness()
     {
         thickness--;
-        graphics -> setThickness(thickness);
+        graphics.setThickness(thickness);
     }
 
     void translate(int x_target, int y_target)
@@ -224,7 +225,7 @@ class Turtle
 
     void draw()
     {
-        pair<int, int> temp = graphics -> drawVector(x, y, len, rotation);
+        pair<int, int> temp = graphics.drawVector(x, y, len, rotation);
         x = temp.first;
         y = temp.second;
         cout<<"reached "<<x<<", "<<y<<endl;
@@ -263,24 +264,23 @@ class Turtle
         int rad = 2;
         float radian = rotation - PI/2;
 
-        graphics -> setColor(make_tuple(0, 1, 0, 0.1));
+        graphics.setColor(make_tuple(0, 1, 0, 0.1));
 
-        graphics -> drawCircle(x, y, rad);
+        graphics.drawCircle(x, y, rad);
 
         float piDiv = 4;
         // //top
-        graphics -> drawLine(x - (rad)*cos(radian), y + rad*sin(radian), x + yDelta*sin(radian), y + yDelta*cos(radian));
-        graphics -> drawLine(x + rad*cos(radian), y - rad*sin(radian), x + yDelta*sin(radian), y + yDelta*cos(radian));
+        graphics.drawLine(x - (rad)*cos(radian), y + rad*sin(radian), x + yDelta*sin(radian), y + yDelta*cos(radian));
+        graphics.drawLine(x + rad*cos(radian), y - rad*sin(radian), x + yDelta*sin(radian), y + yDelta*cos(radian));
 
-        graphics -> drawLine(x - (rad)*cos(radian+PI/piDiv), y + rad*sin(radian+PI/piDiv), x + yDelta*sin(radian+PI/piDiv), y + yDelta*cos(radian+PI/piDiv));
-        graphics -> drawLine(x + rad*cos(radian+PI/piDiv), y - rad*sin(radian+PI/piDiv), x + yDelta*sin(radian+PI/piDiv), y + yDelta*cos(radian+PI/piDiv));
+        graphics.drawLine(x - (rad)*cos(radian+PI/piDiv), y + rad*sin(radian+PI/piDiv), x + yDelta*sin(radian+PI/piDiv), y + yDelta*cos(radian+PI/piDiv));
+        graphics.drawLine(x + rad*cos(radian+PI/piDiv), y - rad*sin(radian+PI/piDiv), x + yDelta*sin(radian+PI/piDiv), y + yDelta*cos(radian+PI/piDiv));
 
-        graphics -> drawLine(x - (rad)*cos(radian-PI/piDiv), y + rad*sin(radian-PI/piDiv), x + yDelta*sin(radian-PI/piDiv), y + yDelta*cos(radian-PI/piDiv));
-        graphics -> drawLine(x + rad*cos(radian-PI/piDiv), y - rad*sin(radian-PI/piDiv), x + yDelta*sin(radian-PI/piDiv), y + yDelta*cos(radian-PI/piDiv));
+        graphics.drawLine(x - (rad)*cos(radian-PI/piDiv), y + rad*sin(radian-PI/piDiv), x + yDelta*sin(radian-PI/piDiv), y + yDelta*cos(radian-PI/piDiv));
+        graphics.drawLine(x + rad*cos(radian-PI/piDiv), y - rad*sin(radian-PI/piDiv), x + yDelta*sin(radian-PI/piDiv), y + yDelta*cos(radian-PI/piDiv));
 
-        graphics -> setColor(color);
+        graphics.setColor(color);
     }
-
 };
 
 
@@ -331,7 +331,7 @@ void generateString(string sentence, int depth)
         return;
     }
 
-    len *= 0.5;
+    // len *= 0.5;
     string nextSentence;
 
     for (int i = 0; i < sentence.length(); i++) {
@@ -360,12 +360,12 @@ int main()
     }
 
     GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "OpenGL Example", NULL, NULL);
-    if(!window)
-    {
+    if(!window) {
         glfwTerminate();
         fprintf(stderr, "Error while creating a window\n");
         return -1;
     }
+    char sentence[] = "X";
     glfwMakeContextCurrent(window);
     glViewport(0.0f, 0.0f, WIDTH, HEIGHT);
     glMatrixMode(GL_PROJECTION);
@@ -387,18 +387,11 @@ int main()
     Turtle turtle;
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
-        if (depth <= 7)
+        if (depth <= 7) {
             generateString(sentence, depth++);
-        // turtle.translate(200, 300);
-        // turtle.rotate(0);
-        // turtle.drawLeaf();
-        // turtle.translate(500, 300);
-        // turtle.rotate(30*PI/180);
-        // turtle.drawLeaf();
-
+        }
         drawPattern(generatedString);
-        // turtle -> draw();
-        // turtle -> rotate(-PI/4);
+
 
         glfwSwapBuffers(window);
         glfwPollEvents();
