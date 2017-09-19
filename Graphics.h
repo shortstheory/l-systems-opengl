@@ -23,6 +23,10 @@ private:
     int thickness;
     tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;
 
+    /// Draws a pixel on the screen given parameters of co-ordinate wrt viewport,
+    /// thickness of point, and color of pixel
+    /// Only called through other member functions
+
     void drawPixel(int x, int y, int thickness, tuple<GLfloat, GLfloat, GLfloat, GLfloat> color)
     {
         GLfloat vertex[] = {(GLfloat) x, (GLfloat) y};
@@ -40,6 +44,10 @@ private:
         glDisableClientState(GL_VERTEX_ARRAY);
     }
 
+    /// A circle can be represented as a combination of eight arcs to reduce calculation
+    /// Takes circle parameters and draws it on the viewport using drawPixel(..)
+    /// Called from drawCircle(..) which calculates the arc of the circle
+
     void drawCirclePixels(int x0, int y0, int x, int y)
     {
         drawPixel(x + x0, y + y0, thickness, color);
@@ -54,18 +62,23 @@ private:
 
 
 public:
-    void setThickness(int thickness)
+    void setThickness(int _thickness)
     {
-        this -> thickness = thickness;
+        thickness = _thickness;
     }
 
-    void setColor(tuple<GLfloat, GLfloat, GLfloat, GLfloat> color)
+    void setColor(tuple<GLfloat, GLfloat, GLfloat, GLfloat> _color)
     {
-        this -> color = color;
+        color = _color;
     }
 
-    void drawLine(int start_x, int start_y, int end_x, int end_y) // we have to take care of too many cases :P
+    /// Draws a line on the viewport given the starting point and ending point
+    /// Uses Bresenham's line drawing algorithm for rendering
+    /// Lines can be drawn in all four quadrants using this function
+
+    void drawLine(int start_x, int start_y, int end_x, int end_y)
     {
+        /// Swap start and end point in case starting X pixel is after the ending X pixel
         if (start_x > end_x) {
             std::swap(start_x, end_x);
             std::swap(start_y, end_y);
@@ -75,7 +88,7 @@ public:
 
         //when line is steeper than 1
         if (abs(dy) > abs(dx)) {
-            if (dy > 0) { //when line has m>1 && m<=infinity
+            if (dy > 0) { //when line has m>1 && m<infinity
                 int p = -2*dx + dy; //initial delta
                 int northDelta = -2*dx;
                 int northEastDelta = 2*dy - 2*dx;
@@ -88,7 +101,7 @@ public:
                     }
                     drawPixel(x, y, thickness, color);
                 }
-            } else { //when it spills over to second quadrant but still has abs(m) > 1
+            } else { //when it spills over to second quadrant, but still has abs(m) > 1
                 int p = 2*dx - dy; //initial delta
                 int southDelta = 2*dx;
                 int southEastDelta = 2*(dy + dx);
@@ -133,6 +146,11 @@ public:
         }
     }
 
+    /// In many cases, we have to draw a line only given its starting point, length and angle
+    /// drawVector(..) takes these parameters and calculates the endpoints for such Lines using simple trignometry
+    /// Lines are rendered using a call to drawLine(..)
+    /// Returns an std::pair<int, int> with endpoints of the given line
+
     pair<int, int> drawVector(int x0, int y0, int len, float angle)
     {
         int a = x0 + (int) (len * cos(angle));
@@ -140,6 +158,9 @@ public:
         drawLine(x0, y0, a, b);
         return make_pair(a, b);
     }
+
+    /// Takes the centre of the circle as x0, y0 values, and the radius of the circle
+    /// Circle is rendered using the mid-point algorithm
 
     void drawCircle(int x0, int y0, int radius)
     {

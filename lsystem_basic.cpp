@@ -67,18 +67,19 @@ void generateString(string sentence, int depth)
 int main()
 {
     srand(time(NULL));
-    if(glfwInit() == false)
-    {
+    if(glfwInit() == false) {
         fprintf(stderr, "Error initializing GLFW\n");
         return -1;
     }
 
     GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "IS F311 Computer Graphics Project", NULL, NULL);
+
     if(!window) {
         glfwTerminate();
         fprintf(stderr, "Error while creating a window\n");
         return -1;
     }
+
     char sentence[] = "X";
     glfwMakeContextCurrent(window);
     glViewport(0.0f, 0.0f, WIDTH, HEIGHT);
@@ -90,12 +91,6 @@ int main()
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapInterval(0);
-    // generateString(sentence, 6);
-
-    // turtle -> draw();
-    // turtle -> draw();
-    // turtle -> rotate(-PI/2);
-    // turtle -> draw();
 
     int depth = 1;
     Turtle turtle;
