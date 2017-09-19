@@ -12,8 +12,8 @@
 
 using namespace std;
 
-#define WIDTH 800
-#define HEIGHT 900
+#define WIDTH 1600
+#define HEIGHT 1800
 #define PI 3.1415
 
 char sentence[] = "X";
@@ -183,7 +183,7 @@ class Turtle
     tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;
     stack<tuple<int, int, float>> states;
 
-    Graphics * graphics = new Graphics();
+    // Graphics graphics = new Graphics();
 
     public: Turtle()
     {
@@ -255,11 +255,13 @@ class Turtle
 
     void drawLeaf()
     {
-        int xDelta = len / 2;//5;
-        int yDelta = len * 2;//30;
-        int rad = len;//12;
+        // int xDelta = len / 2;//5;
+        // int yDelta = len * 2;//30;
+        // int rad = 20;//12;
 
-        float radian = PI/180*rotation;
+        int yDelta = 5;
+        int rad = 2;
+        float radian = rotation - PI/2;
 
         graphics -> setColor(make_tuple(0, 1, 0, 0.1));
 
@@ -284,37 +286,37 @@ class Turtle
 
 void drawPattern(string sentence)
 {
-    Turtle * turtle = new Turtle();
+    Turtle turtle;
     // float rotation = PI / 2;
     float angle = (PI / 180) * 22.5;
 
     // translate(WIDTH/2, 0);
     // int x0 = WIDTH / 2;
     // int y0 = 0;
-    turtle -> translate(WIDTH/2, 0);
+    turtle.translate(WIDTH/2, 0);
 
     for (int i = 0; i < sentence.length(); i++) {
         char current = sentence[i];
 
         if((i%2) == 0) {
             cout << i << endl;
-            // turtle -> changeColor();
-            // turtle -> reduceThickness();
+            // turtle.changeColor();
+            // turtle.reduceThickness();
         }
 
         if (current == 'F') {
-            turtle -> draw();
+            turtle.draw();
         } else if (current == '+') {
-            turtle -> rotate(-angle);
+            turtle.rotate(-angle);
         } else if (current == '-') {
-            turtle -> rotate(angle);
+            turtle.rotate(angle);
         } else if (current == '[') {
-            turtle -> saveState();
+            turtle.saveState();
         } else if (current == ']') {
-            turtle -> restoreState();
+            turtle.restoreState();
         } else if (current == 'X' && sentence[i] != '[') {
-            // turtle -> changeColor();
-            turtle -> drawLeaf();
+            // turtle.changeColor();
+            turtle.drawLeaf();
         }
     }
 }
@@ -371,10 +373,10 @@ int main()
     glOrtho(0, WIDTH, 0, HEIGHT, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glClearColor(1, 1, 1, 1);
+    // glClearColor(1, 1, 1, 1);
     glClear( GL_COLOR_BUFFER_BIT );
     glfwSwapInterval(0);
-    // generateString(sentence, 5);
+    // generateString(sentence, 6);
 
     // turtle -> draw();
     // turtle -> draw();
@@ -382,12 +384,19 @@ int main()
     // turtle -> draw();
 
     int depth = 1;
+    Turtle turtle;
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
-        if (depth < 6)
+        if (depth <= 7)
             generateString(sentence, depth++);
-        drawPattern(generatedString);
+        // turtle.translate(200, 300);
+        // turtle.rotate(0);
+        // turtle.drawLeaf();
+        // turtle.translate(500, 300);
+        // turtle.rotate(30*PI/180);
+        // turtle.drawLeaf();
 
+        drawPattern(generatedString);
         // turtle -> draw();
         // turtle -> rotate(-PI/4);
 

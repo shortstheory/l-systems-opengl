@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_FLAGS =   -std=gnu++11
 
-CXX_DEFINES = -DGLFW_DLL
+CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/pranavasty/Projects/Computer Graphics/Assignment1/build" -I"/home/pranavasty/Projects/Computer Graphics/Assignment1" 
+CXX_INCLUDES = -I/home/nic/original-projects/open-gl/build -I/home/nic/original-projects/open-gl 
 

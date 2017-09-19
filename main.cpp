@@ -149,9 +149,9 @@ void drawCircle(int radius, int origin_x, int origin_y)
     }
 }
 
-void drawLeaf(int origin_x, int origin_y, float angle = 30.0)
+void drawLeaf(int origin_x, int origin_y, float angle = 0.0)
 {
-    int xDelta = 5;
+    // int xDelta = 5;
     int yDelta = 40;
     int rad = 20;
 

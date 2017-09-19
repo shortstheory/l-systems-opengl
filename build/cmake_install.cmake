@@ -1,4 +1,4 @@
-# Install script for directory: /home/pranavasty/Projects/Computer Graphics/Assignment1
+# Install script for directory: /home/nic/original-projects/open-gl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pranavasty/Projects/Computer Graphics/Assignment1/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/nic/original-projects/open-gl/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
