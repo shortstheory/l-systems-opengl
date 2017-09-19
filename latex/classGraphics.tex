@@ -1,0 +1,60 @@
+\hypertarget{classGraphics}{}\section{Graphics Class Reference}
+\label{classGraphics}\index{Graphics@{Graphics}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries set\+Thickness} (int \+\_\+thickness)\hypertarget{classGraphics_a1effb39dfe4306fbf9b8faa0db77e6e2}{}\label{classGraphics_a1effb39dfe4306fbf9b8faa0db77e6e2}
+
+\item 
+void {\bfseries set\+Color} (tuple$<$ G\+Lfloat, G\+Lfloat, G\+Lfloat, G\+Lfloat $>$ \+\_\+color)\hypertarget{classGraphics_a72255246d60b42b39009ed5cdffae7f7}{}\label{classGraphics_a72255246d60b42b39009ed5cdffae7f7}
+
+\item 
+void \hyperlink{classGraphics_aa98fb835b7e746489ab2bd619274ed55}{draw\+Line} (int start\+\_\+x, int start\+\_\+y, int end\+\_\+x, int end\+\_\+y)
+\item 
+pair$<$ int, int $>$ \hyperlink{classGraphics_a3af73cb52bde4723a9db9006ab6187a4}{draw\+Vector} (int x0, int y0, int len, float angle)
+\item 
+void \hyperlink{classGraphics_a2f089f205f649a276c0995af6557a94c}{draw\+Circle} (int x0, int y0, int radius)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Graphics@{Graphics}!draw\+Circle@{draw\+Circle}}
+\index{draw\+Circle@{draw\+Circle}!Graphics@{Graphics}}
+\subsubsection[{\texorpdfstring{draw\+Circle(int x0, int y0, int radius)}{drawCircle(int x0, int y0, int radius)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+::draw\+Circle (
+\begin{DoxyParamCaption}
+\item[{int}]{x0, }
+\item[{int}]{y0, }
+\item[{int}]{radius}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classGraphics_a2f089f205f649a276c0995af6557a94c}{}\label{classGraphics_a2f089f205f649a276c0995af6557a94c}
+Takes the centre of the circle as x0, y0 values, and the radius of the circle. The circle is rendered using the mid-\/point algorithm. \index{Graphics@{Graphics}!draw\+Line@{draw\+Line}}
+\index{draw\+Line@{draw\+Line}!Graphics@{Graphics}}
+\subsubsection[{\texorpdfstring{draw\+Line(int start\+\_\+x, int start\+\_\+y, int end\+\_\+x, int end\+\_\+y)}{drawLine(int start_x, int start_y, int end_x, int end_y)}}]{\setlength{\rightskip}{0pt plus 5cm}void Graphics\+::draw\+Line (
+\begin{DoxyParamCaption}
+\item[{int}]{start\+\_\+x, }
+\item[{int}]{start\+\_\+y, }
+\item[{int}]{end\+\_\+x, }
+\item[{int}]{end\+\_\+y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classGraphics_aa98fb835b7e746489ab2bd619274ed55}{}\label{classGraphics_aa98fb835b7e746489ab2bd619274ed55}
+Draws a line on the viewport given the starting point and ending point. This function uses Bresenham\textquotesingle{}s line drawing algorithm for rendering clearly and efficiently.
+
+Using a modification of Bresenham\textquotesingle{}s algorithm, this function can draw lines in all four quadrants \index{Graphics@{Graphics}!draw\+Vector@{draw\+Vector}}
+\index{draw\+Vector@{draw\+Vector}!Graphics@{Graphics}}
+\subsubsection[{\texorpdfstring{draw\+Vector(int x0, int y0, int len, float angle)}{drawVector(int x0, int y0, int len, float angle)}}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$int, int$>$ Graphics\+::draw\+Vector (
+\begin{DoxyParamCaption}
+\item[{int}]{x0, }
+\item[{int}]{y0, }
+\item[{int}]{len, }
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classGraphics_a3af73cb52bde4723a9db9006ab6187a4}{}\label{classGraphics_a3af73cb52bde4723a9db9006ab6187a4}
+In many cases, we have to draw a line only given its starting point, length and angle.
+
+draw\+Vector(..) takes these parameters and calculates the endpoints for such Lines using simple trignometry. Lines are rendered using a call to draw\+Line(..)
+
+Returns an std\+::pair$<$int, int$>$ with endpoints of the given line 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Graphics.\+h\end{DoxyCompactItemize}

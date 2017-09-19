@@ -94,6 +94,7 @@ public:
 
     /// Pops the last saved stack from the stack and sets the Turtle to that state
     /// for future line drawing. Outputs an error message in case the stack is empty.
+
     void restoreState()
     {
         if (states.empty()) {
@@ -107,7 +108,8 @@ public:
         rotation = get<2>(temp);
     }
 
-    // Draws a simple polygonal leaf consisting of 
+    /// Draws a simple polygonal leaf consisting of a circle and three triangles.
+    /// The leaf is drawn at the current state of the Turtle.
 
     void drawLeaf()
     {

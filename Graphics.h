@@ -24,9 +24,9 @@ private:
     tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;
 
     /// Draws a pixel on the screen given parameters of co-ordinate wrt viewport,
-    /// thickness of point, and color of pixel
+    /// thickness of point, and color of pixel.
     ///
-    /// Only called through other member functions
+    /// Only called through other member functions.
 
     void drawPixel(int x, int y, int thickness, tuple<GLfloat, GLfloat, GLfloat, GLfloat> color)
     {
@@ -45,11 +45,12 @@ private:
         glDisableClientState(GL_VERTEX_ARRAY);
     }
 
-    /// A circle can be represented as a combination of eight arcs to reduce calculation
+    /// A circle can be represented as a combination of eight arcs in four quadrants
+    /// using cases of whether |y| > |x| to reduce calculations.
     ///
-    /// Takes circle parameters and draws it on the viewport using drawPixel(..)
+    /// This takes circle parameters and draws it on the viewport using drawPixel(..).
     ///
-    /// Called from drawCircle(..) which calculates the arc of the circle
+    /// Called from drawCircle(..) which calculates the arc of the circle.
 
     void drawCirclePixels(int x0, int y0, int x, int y)
     {
@@ -75,11 +76,11 @@ public:
         color = _color;
     }
 
-    /// Draws a line on the viewport given the starting point and ending point
+    /// Draws a line on the viewport given the starting point and ending point.
+    /// This function uses Bresenham's line drawing algorithm for rendering clearly
+    /// and efficiently.
     ///
-    /// Uses Bresenham's line drawing algorithm for rendering
-    ///
-    /// Lines can be drawn in all four quadrants using this function
+    /// Using a modification of Bresenham's algorithm, this function can draw lines in all four quadrants
 
     void drawLine(int start_x, int start_y, int end_x, int end_y)
     {
@@ -151,10 +152,9 @@ public:
         }
     }
 
-    /// In many cases, we have to draw a line only given its starting point, length and angle
+    /// In many cases, we have to draw a line only given its starting point, length and angle.
     ///
-    /// drawVector(..) takes these parameters and calculates the endpoints for such Lines using simple trignometry
-    ///
+    /// drawVector(..) takes these parameters and calculates the endpoints for such Lines using simple trignometry.
     /// Lines are rendered using a call to drawLine(..)
     ///
     /// Returns an std::pair<int, int> with endpoints of the given line
@@ -167,9 +167,8 @@ public:
         return make_pair(a, b);
     }
 
-    /// Takes the centre of the circle as x0, y0 values, and the radius of the circle
-    ///
-    /// The circle is rendered using the mid-point algorithm
+    /// Takes the centre of the circle as x0, y0 values, and the radius of the circle.
+    /// The circle is rendered using the mid-point algorithm.
 
     void drawCircle(int x0, int y0, int radius)
     {
@@ -197,3 +196,4 @@ public:
 };
 
 #endif
+unr

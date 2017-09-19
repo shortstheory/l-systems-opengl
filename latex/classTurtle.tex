@@ -1,0 +1,88 @@
+\hypertarget{classTurtle}{}\section{Turtle Class Reference}
+\label{classTurtle}\index{Turtle@{Turtle}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTurtle_a1610c37c2e750169f25b074e62db755d}{Turtle} ()
+\item 
+void \hyperlink{classTurtle_a3a785e57caf1d427656786278d3b0ba1}{change\+Color} ()
+\item 
+void \hyperlink{classTurtle_ab61cec4f4220126f3b45a1303c1f3b03}{reduce\+Thickness} ()
+\item 
+void \hyperlink{classTurtle_a1ac311827ae11900b6d0dd76304f72a5}{translate} (int x\+\_\+target, int y\+\_\+target)\hypertarget{classTurtle_a1ac311827ae11900b6d0dd76304f72a5}{}\label{classTurtle_a1ac311827ae11900b6d0dd76304f72a5}
+
+\begin{DoxyCompactList}\small\item\em Simply move the \hyperlink{classTurtle}{Turtle} to the desired co-\/ordinate on the viewport. \end{DoxyCompactList}\item 
+void \hyperlink{classTurtle_ace9c83560bdcb5c9480d017f000a724b}{set\+Angle} (float angle)\hypertarget{classTurtle_ace9c83560bdcb5c9480d017f000a724b}{}\label{classTurtle_ace9c83560bdcb5c9480d017f000a724b}
+
+\begin{DoxyCompactList}\small\item\em Sets the angle of inclination of the \hyperlink{classTurtle}{Turtle}\textquotesingle{}s pointer with respect to the x-\/axis. \end{DoxyCompactList}\item 
+void \hyperlink{classTurtle_a2461a61b2d42bca39c466e75af3cd4e3}{draw} ()
+\item 
+void \hyperlink{classTurtle_a4f667fe3bee778bb6d37071f0bcabd34}{rotate} (float angle)\hypertarget{classTurtle_a4f667fe3bee778bb6d37071f0bcabd34}{}\label{classTurtle_a4f667fe3bee778bb6d37071f0bcabd34}
+
+\begin{DoxyCompactList}\small\item\em Rotates the \hyperlink{classTurtle}{Turtle}\textquotesingle{}s pointer through an angle. \end{DoxyCompactList}\item 
+void \hyperlink{classTurtle_abfdb07aa29fc62888d3f28cc68c951f4}{save\+State} ()
+\item 
+void \hyperlink{classTurtle_ad96aa7929b2421e3b30ebb76b2295880}{restore\+State} ()
+\item 
+void \hyperlink{classTurtle_abac9a4338af2d7ad1248f067135f992a}{draw\+Leaf} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Turtle@{Turtle}!Turtle@{Turtle}}
+\index{Turtle@{Turtle}!Turtle@{Turtle}}
+\subsubsection[{\texorpdfstring{Turtle()}{Turtle()}}]{\setlength{\rightskip}{0pt plus 5cm}Turtle\+::\+Turtle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTurtle_a1610c37c2e750169f25b074e62db755d}{}\label{classTurtle_a1610c37c2e750169f25b074e62db755d}
+Default empty constructor for \hyperlink{classTurtle}{Turtle}. Initialises all values and sets the color to brown for drawing the tree trunk 
+
+\subsection{Member Function Documentation}
+\index{Turtle@{Turtle}!change\+Color@{change\+Color}}
+\index{change\+Color@{change\+Color}!Turtle@{Turtle}}
+\subsubsection[{\texorpdfstring{change\+Color()}{changeColor()}}]{\setlength{\rightskip}{0pt plus 5cm}void Turtle\+::change\+Color (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTurtle_a3a785e57caf1d427656786278d3b0ba1}{}\label{classTurtle_a3a785e57caf1d427656786278d3b0ba1}
+Colors in Open\+GL range from 0 -\/$>$ 1. Hence to change intensity, we have to map the desired color to these values. \index{Turtle@{Turtle}!draw@{draw}}
+\index{draw@{draw}!Turtle@{Turtle}}
+\subsubsection[{\texorpdfstring{draw()}{draw()}}]{\setlength{\rightskip}{0pt plus 5cm}void Turtle\+::draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTurtle_a2461a61b2d42bca39c466e75af3cd4e3}{}\label{classTurtle_a2461a61b2d42bca39c466e75af3cd4e3}
+Draws a line given the starting point, length of the line, and the current rotation of the \hyperlink{classTurtle}{Turtle}\textquotesingle{}s pointer. \index{Turtle@{Turtle}!draw\+Leaf@{draw\+Leaf}}
+\index{draw\+Leaf@{draw\+Leaf}!Turtle@{Turtle}}
+\subsubsection[{\texorpdfstring{draw\+Leaf()}{drawLeaf()}}]{\setlength{\rightskip}{0pt plus 5cm}void Turtle\+::draw\+Leaf (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTurtle_abac9a4338af2d7ad1248f067135f992a}{}\label{classTurtle_abac9a4338af2d7ad1248f067135f992a}
+Draws a simple polygonal leaf consisting of a circle and three triangles. The leaf is drawn at the current state of the \hyperlink{classTurtle}{Turtle}. \index{Turtle@{Turtle}!reduce\+Thickness@{reduce\+Thickness}}
+\index{reduce\+Thickness@{reduce\+Thickness}!Turtle@{Turtle}}
+\subsubsection[{\texorpdfstring{reduce\+Thickness()}{reduceThickness()}}]{\setlength{\rightskip}{0pt plus 5cm}void Turtle\+::reduce\+Thickness (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTurtle_ab61cec4f4220126f3b45a1303c1f3b03}{}\label{classTurtle_ab61cec4f4220126f3b45a1303c1f3b03}
+As thicnkess of trunks/branches decreases as we go up the tree, we can decrement it as we draw the tree. Sets the thickness for draw\+Pixel(..) \index{Turtle@{Turtle}!restore\+State@{restore\+State}}
+\index{restore\+State@{restore\+State}!Turtle@{Turtle}}
+\subsubsection[{\texorpdfstring{restore\+State()}{restoreState()}}]{\setlength{\rightskip}{0pt plus 5cm}void Turtle\+::restore\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTurtle_ad96aa7929b2421e3b30ebb76b2295880}{}\label{classTurtle_ad96aa7929b2421e3b30ebb76b2295880}
+Pops the last saved stack from the stack and sets the \hyperlink{classTurtle}{Turtle} to that state for future line drawing. Outputs an error message in case the stack is empty. \index{Turtle@{Turtle}!save\+State@{save\+State}}
+\index{save\+State@{save\+State}!Turtle@{Turtle}}
+\subsubsection[{\texorpdfstring{save\+State()}{saveState()}}]{\setlength{\rightskip}{0pt plus 5cm}void Turtle\+::save\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTurtle_abfdb07aa29fc62888d3f28cc68c951f4}{}\label{classTurtle_abfdb07aa29fc62888d3f28cc68c951f4}
+Part of the language of many L-\/systems involve back-\/tracking to a state. Here we can save the current state of the \hyperlink{classTurtle}{Turtle} (current co-\/ordinate and rotation) so we can move back to it later. States are stored in an std\+::stack of tuples. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Turtle.\+h\end{DoxyCompactItemize}
