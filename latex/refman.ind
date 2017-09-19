@@ -1,0 +1,21 @@
+\begin{theindex}
+
+  \item {draw\+Circle}
+    \subitem {Graphics}, \hyperpage{3}
+  \item {draw\+Line}
+    \subitem {Graphics}, \hyperpage{3}
+  \item {draw\+Vector}
+    \subitem {Graphics}, \hyperpage{3}
+
+  \indexspace
+
+  \item {Graphics}, \hyperpage{3}
+    \subitem {draw\+Circle}, \hyperpage{3}
+    \subitem {draw\+Line}, \hyperpage{3}
+    \subitem {draw\+Vector}, \hyperpage{3}
+
+  \indexspace
+
+  \item {Turtle}, \hyperpage{4}
+
+\end{theindex}
