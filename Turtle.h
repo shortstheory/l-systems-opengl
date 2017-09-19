@@ -15,6 +15,10 @@ private:
     Graphics graphics;
 
 public:
+
+    /// Default empty constructor for Turtle.
+    /// Initialises all values and sets the color to brown for drawing the tree trunk
+
     Turtle()
     {
         thickness = 1;
@@ -25,6 +29,9 @@ public:
         graphics.setThickness(thickness);
     }
 
+    /// Colors in OpenGL range from 0 -> 1. Hence to change intensity, we have to map
+    /// the desired color to these values.
+
     void changeColor()
     {
         GLfloat red = (float)(rand()%100) / (float)100;
@@ -34,11 +41,16 @@ public:
         graphics.setColor(color);
     }
 
+    /// As thicnkess of trunks/branches decreases as we go up the tree, we can decrement
+    /// it as we draw the tree. Sets the thickness for drawPixel(..)
+
     void reduceThickness()
     {
         thickness--;
         graphics.setThickness(thickness);
     }
+
+    /// Simply move the Turtle to the desired co-ordinate on the viewport
 
     void translate(int x_target, int y_target)
     {
@@ -46,10 +58,15 @@ public:
         y = y_target;
     }
 
+    /// Sets the angle of inclination of the Turtle's pointer with respect to the x-axis.
+
     void setAngle(float angle)
     {
         rotation = angle;
     }
+
+    /// Draws a line given the starting point, length of the line, and the
+    /// current rotation of the Turtle's pointer.
 
     void draw()
     {
@@ -59,16 +76,24 @@ public:
         // cout<<"reached "<<x<<", "<<y<<endl;
     }
 
+    /// Rotates the Turtle's pointer through an angle.
+
     void rotate(float angle)
     {
         rotation += angle;
     }
+
+    /// Part of the language of many L-systems involve back-tracking to a state.
+    /// Here we can save the current state of the Turtle (current co-ordinate and rotation)
+    /// so we can move back to it later. States are stored in an std::stack of tuples.
 
     void saveState()
     {
         states.push(make_tuple(x, y, rotation));
     }
 
+    /// Pops the last saved stack from the stack and sets the Turtle to that state
+    /// for future line drawing. Outputs an error message in case the stack is empty.
     void restoreState()
     {
         if (states.empty()) {
@@ -81,6 +106,8 @@ public:
         y = get<1>(temp);
         rotation = get<2>(temp);
     }
+
+    // Draws a simple polygonal leaf consisting of 
 
     void drawLeaf()
     {
