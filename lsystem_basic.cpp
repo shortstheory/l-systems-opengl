@@ -1,7 +1,7 @@
 #include "Turtle.h"
 
-#define WIDTH 800
-#define HEIGHT 800
+#define WIDTH 1200
+#define HEIGHT 1800
 
 void drawPattern(string sentence)
 {
@@ -20,7 +20,9 @@ void drawPattern(string sentence)
         }
 
         if (current == 'F') {
+            turtle.setThickness(3);
             turtle.draw();
+            turtle.setThickness(2);
         } else if (current == '+') {
             turtle.rotate(-angle);
         } else if (current == '-') {
@@ -97,14 +99,15 @@ int main()
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
-        if (depth < 7) {
+        if (depth < 6) {
             generateString(sentence, depth++);
         }
         drawPattern(generatedString);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-        sleep(1);
+        // sleep(1);
+        for (long long i = 0; i < 200000000; i++);
     }
     glfwDestroyWindow(window);
     glfwTerminate();

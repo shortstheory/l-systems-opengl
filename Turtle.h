@@ -44,10 +44,12 @@ public:
     /// As thicnkess of trunks/branches decreases as we go up the tree, we can decrement
     /// it as we draw the tree. Sets the thickness for drawPixel(..)
 
-    void reduceThickness()
+    void setThickness(int val = 0)
     {
-        thickness--;
-        graphics.setThickness(thickness);
+        if (val == 0) {
+            val = thickness--;
+        }
+        graphics.setThickness(val);
     }
 
     /// Simply move the Turtle to the desired co-ordinate on the viewport
@@ -117,7 +119,8 @@ public:
         int rad = 2;
         float radian = rotation - PI/2;
 
-        graphics.setColor(make_tuple(0, 1, 0, 0.1));
+        GLfloat green_intensity = 0.5 + (float)(rand() % 100) / (float) 200;
+        graphics.setColor(make_tuple(0, green_intensity, 0, 0.9));
 
         graphics.drawCircle(x, y, rad);
 
