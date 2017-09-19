@@ -1,4 +1,0 @@
-/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/edit_cache.dir
-/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/rebuild_cache.dir
-/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/lsystem.dir
-/home/pranavasty/Projects/Computer Graphics/Assignment1/build/CMakeFiles/testas.dir
