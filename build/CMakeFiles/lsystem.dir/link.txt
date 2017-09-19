@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/lsystem.dir/lsystem_basic.cpp.o  -o lsystem -rdynamic -lGLU -lGL -lglfw 
