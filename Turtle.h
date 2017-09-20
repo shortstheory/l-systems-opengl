@@ -14,6 +14,9 @@ private:
     stack<tuple<int, int, float>> states;
     Graphics graphics;
 
+    random_device rd;
+    mt19937 gen;
+
 public:
 
     /// Default empty constructor for Turtle.
@@ -22,11 +25,13 @@ public:
     Turtle()
     {
         thickness = 1;
-        len = 200/32;
+        len = 200/40;
         rotation = PI / 2;
         color = make_tuple(0.4, 0.2, 0, 1); // brown color
         graphics.setColor(color);
         graphics.setThickness(thickness);
+
+        gen.seed(rd());
     }
 
     /// Colors in OpenGL range from 0 -> 1. Hence to change intensity, we have to map
@@ -113,11 +118,13 @@ public:
 
     void drawLeaf()
     {
+        uniform_real_distribution<> dis(0, 1);
         int yDelta = 5;
         int rad = 2;
         float radian = rotation - PI/2;
 
-        graphics.setColor(make_tuple(0, 1, 0, 0.1));
+        // graphics.setColor(make_tuple(dis(gen), dis(gen), dis(gen), 1));
+        graphics.setColor(make_tuple(dis(gen), dis(gen), 0, 1));
 
         graphics.drawCircle(x, y, rad);
 
