@@ -1,7 +1,8 @@
 #include "Turtle.h"
+#include <unistd.h>
 
-#define WIDTH 1200
-#define HEIGHT 1800
+#define WIDTH 800
+#define HEIGHT 800
 
 void drawPattern(string sentence)
 {
@@ -71,6 +72,9 @@ int main()
     const int generations = 7;
 
     srand(time(NULL));
+
+    // OpenGL initialisation code
+
     if(glfwInit() == false) {
         fprintf(stderr, "Error initializing GLFW\n");
         return -1;
@@ -84,7 +88,6 @@ int main()
         return -1;
     }
 
-    string sentence = "X";
     glfwMakeContextCurrent(window);
     glViewport(0.0f, 0.0f, WIDTH, HEIGHT);
     glMatrixMode(GL_PROJECTION);
@@ -96,8 +99,11 @@ int main()
     glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapInterval(0);
 
+    string sentence = "X";
     int depth = 1;
     Turtle turtle;
+
+    // Render loop for the OpenGL window. The scene is redrawn on every refresh.
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
@@ -108,9 +114,11 @@ int main()
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-        sleep(1);
+        usleep(0.25 * 1e6);
+        // sleep(1);
         // for (long long i = 0; i < 200000000; i++);
     }
+
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
