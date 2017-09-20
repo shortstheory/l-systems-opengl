@@ -15,23 +15,22 @@ void drawPattern(string sentence)
         char current = sentence[i];
 
         if((i%2) == 0) {
-            cout << i << endl;
             // turtle.changeColor();
             // turtle.reduceThickness();
         }
 
         if (current == 'F') {
-            turtle.setThickness(3);
             turtle.draw();
-            turtle.setThickness(2);
         } else if (current == '+') {
             turtle.rotate(-angle);
         } else if (current == '-') {
             turtle.rotate(angle);
         } else if (current == '[') {
             turtle.saveState();
+            turtle.setThickness();
         } else if (current == ']') {
             turtle.restoreState();
+            turtle.setThickness();
         } else if (current == 'X' && sentence[i] != '[') {
             // turtle.changeColor();
             turtle.drawLeaf();
@@ -95,14 +94,14 @@ int main()
     glOrtho(0, WIDTH, 0, HEIGHT, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glClearColor(0, 0, 0, 1);
+    // glClearColor(0.6, 0.6, 0.6, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapInterval(0);
 
     string sentence = "X";
     int depth = 1;
     Turtle turtle;
-
+    // generateString(sentence, 6);
     // Render loop for the OpenGL window. The scene is redrawn on every refresh.
 
     while (!glfwWindowShouldClose(window)) {

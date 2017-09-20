@@ -7,11 +7,12 @@ class Turtle
 {
 private:
     int thickness;
+    float branch_contraction_ratio;
     int len;
     float rotation;
     int x, y;
     tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;
-    stack<tuple<int, int, float>> states;
+    stack<tuple<int, int, float, int>> states;
     Graphics graphics;
 
     //We use the famous Mersenne Twister PRNG algorithm for giving random colors
@@ -26,7 +27,8 @@ public:
 
     Turtle()
     {
-        thickness = 1;
+        thickness = 10;
+        branch_contraction_ratio = 0.8;
         len = 200/40;
         rotation = PI / 2;
         color = make_tuple(0.4, 0.2, 0, 1); // brown color
@@ -54,7 +56,8 @@ public:
     void setThickness(int val = 0)
     {
         if (val == 0) {
-            val = thickness--;
+            thickness *= branch_contraction_ratio;
+            val = thickness;
         }
         graphics.setThickness(val);
     }
@@ -98,7 +101,7 @@ public:
 
     void saveState()
     {
-        states.push(make_tuple(x, y, rotation));
+        states.push(make_tuple(x, y, rotation, thickness));
     }
 
     /// Pops the last saved stack from the stack and sets the Turtle to that state
@@ -110,11 +113,12 @@ public:
             cout << "No saved state available" << endl;
             return;
         }
-        tuple<int, int, float> temp = states.top();
+        tuple<int, int, float, int> temp = states.top();
         states.pop();
         x = get<0>(temp);
         y = get<1>(temp);
         rotation = get<2>(temp);
+        thickness = get<3>(temp);
     }
 
     /// Draws a simple polygonal leaf consisting of a circle and three triangles.
@@ -122,6 +126,7 @@ public:
 
     void drawLeaf()
     {
+        graphics.setThickness(1); // Leaves are always of thickness 1
         uniform_real_distribution<> dis(0, 1);
         int yDelta = 5;
         int rad = 2;
@@ -144,6 +149,7 @@ public:
         graphics.drawLine(x + rad*cos(radian-PI/piDiv), y - rad*sin(radian-PI/piDiv), x + yDelta*sin(radian-PI/piDiv), y + yDelta*cos(radian-PI/piDiv));
 
         graphics.setColor(color);
+        graphics.setThickness(thickness); // Restore original thickness after leaf drawing complete
     }
 };
 
