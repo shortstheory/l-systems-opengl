@@ -14,6 +14,8 @@ private:
     stack<tuple<int, int, float>> states;
     Graphics graphics;
 
+    //We use the famous Mersenne Twister PRNG algorithm for giving random colors
+    //to the leaves
     random_device rd;
     mt19937 gen;
 
