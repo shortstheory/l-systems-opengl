@@ -64,7 +64,6 @@ public:
         if (val == -1) {
             thickness *= tapering_ratio;
             val = thickness;
-            x += (thickness / 64);
         }
         graphics.setThickness(val);
     }

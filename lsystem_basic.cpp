@@ -12,7 +12,7 @@ void drawPattern(string sentence)
     turtle.translate(WIDTH/2, 0);
 
     int draw_num = 0;
-
+    int trunk = 1; // To keep track when to stop tapering and start branch contraction
     for (int i = 0; i < sentence.length(); i++) {
         char current = sentence[i];
 
@@ -23,8 +23,8 @@ void drawPattern(string sentence)
 
         if (current == 'F') {
             turtle.draw();
-            if (draw_num++ % 5 == 0) {
-                turtle.setThickness(-1);
+            if (draw_num++ % 5 == 0 && trunk) {
+                turtle.setThickness(-1); // -1 corresponds to taper
             }
         } else if (current == '+') {
             turtle.rotate(-angle);
@@ -32,11 +32,12 @@ void drawPattern(string sentence)
             turtle.rotate(angle);
         } else if (current == '[') {
             turtle.saveState();
-            turtle.setThickness();
+            turtle.setThickness(0); // 0 corresponds to branch contraction
         } else if (current == ']') {
             turtle.restoreState();
-            turtle.setThickness();
-        } else if (current == 'X' && sentence[i] != '[') {
+            turtle.setThickness(0); // 0 corresponds to branch contraction
+        } else if (current == 'X' && sentence[i + 1] != '[') {
+            trunk = 0; // Stop tapering
             // turtle.changeColor();
             turtle.drawLeaf();
         }
