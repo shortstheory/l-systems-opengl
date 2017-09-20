@@ -68,6 +68,8 @@ void generateString(string sentence, int depth)
 
 int main()
 {
+    const int generations = 7;
+
     srand(time(NULL));
     if(glfwInit() == false) {
         fprintf(stderr, "Error initializing GLFW\n");
@@ -82,7 +84,7 @@ int main()
         return -1;
     }
 
-    char sentence[] = "X";
+    string sentence = "X";
     glfwMakeContextCurrent(window);
     glViewport(0.0f, 0.0f, WIDTH, HEIGHT);
     glMatrixMode(GL_PROJECTION);
@@ -99,15 +101,15 @@ int main()
 
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
-        if (depth < 6) {
+        if (depth < generations) {
             generateString(sentence, depth++);
         }
         drawPattern(generatedString);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-        // sleep(1);
-        for (long long i = 0; i < 200000000; i++);
+        sleep(1);
+        // for (long long i = 0; i < 200000000; i++);
     }
     glfwDestroyWindow(window);
     glfwTerminate();
