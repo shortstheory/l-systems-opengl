@@ -51,10 +51,12 @@ public:
     /// As thicnkess of trunks/branches decreases as we go up the tree, we can decrement
     /// it as we draw the tree. Sets the thickness for drawPixel(..)
 
-    void reduceThickness()
+    void setThickness(int val = 0)
     {
-        thickness--;
-        graphics.setThickness(thickness);
+        if (val == 0) {
+            val = thickness--;
+        }
+        graphics.setThickness(val);
     }
 
     /// Simply move the Turtle to the desired co-ordinate on the viewport
