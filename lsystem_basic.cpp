@@ -11,6 +11,8 @@ void drawPattern(string sentence)
 
     turtle.translate(WIDTH/2, 0);
 
+    int draw_num = 0;
+
     for (int i = 0; i < sentence.length(); i++) {
         char current = sentence[i];
 
@@ -21,6 +23,9 @@ void drawPattern(string sentence)
 
         if (current == 'F') {
             turtle.draw();
+            if (draw_num++ % 5 == 0) {
+                turtle.setThickness(-1);
+            }
         } else if (current == '+') {
             turtle.rotate(-angle);
         } else if (current == '-') {

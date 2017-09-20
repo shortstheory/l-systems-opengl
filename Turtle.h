@@ -8,6 +8,7 @@ class Turtle
 private:
     int thickness;
     float branch_contraction_ratio;
+    float tapering_ratio;
     int len;
     float rotation;
     int x, y;
@@ -27,8 +28,9 @@ public:
 
     Turtle()
     {
-        thickness = 10;
+        thickness = 20;
         branch_contraction_ratio = 0.8;
+        tapering_ratio = 0.95;
         len = 200/40;
         rotation = PI / 2;
         color = make_tuple(0.4, 0.2, 0, 1); // brown color
@@ -58,6 +60,11 @@ public:
         if (val == 0) {
             thickness *= branch_contraction_ratio;
             val = thickness;
+        }
+        if (val == -1) {
+            thickness *= tapering_ratio;
+            val = thickness;
+            x += (thickness / 64);
         }
         graphics.setThickness(val);
     }
