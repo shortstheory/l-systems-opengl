@@ -58,7 +58,13 @@ void generateString(string sentence, int depth)
 
     for (int i = 0; i < sentence.length(); i++) {
         if (sentence[i] == 'X') {
-            nextSentence += "F-[[X]+X]+F[+FX]-X";
+            int choice = rand() % 3;
+            if (choice == 0)
+                nextSentence += "F-[[X]+X]+F[+FX]-X";
+            else if (choice == 1)
+                nextSentence += "F[+X][-X]FX";
+            else
+                nextSentence += "F[+X]F[-X]+X";
             continue;
         }
         if (sentence[i] == 'F') {
