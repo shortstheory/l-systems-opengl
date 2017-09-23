@@ -4,10 +4,10 @@
 #define WIDTH 800
 #define HEIGHT 800
 
-void drawPattern(string sentence)
+void drawPattern(string sentence, int turnAngle, int season)
 {
     Turtle turtle;
-    float angle = (PI / 180) * 22.5;
+    float angle = (PI / 180) * turnAngle;
 
     turtle.translate(WIDTH/2, 0);
 
@@ -16,10 +16,6 @@ void drawPattern(string sentence)
     for (int i = 0; i < sentence.length(); i++) {
         char current = sentence[i];
 
-        if((i%2) == 0) {
-            // turtle.changeColor();
-            // turtle.reduceThickness();
-        }
 
         if (current == 'F') {
             turtle.draw();
@@ -39,7 +35,7 @@ void drawPattern(string sentence)
         } else if (current == 'X' && sentence[i + 1] != '[') {
             trunk = 0; // Stop tapering
             // turtle.changeColor();
-            turtle.drawLeaf();
+            turtle.drawLeaf(season);
         }
     }
 }
@@ -58,12 +54,15 @@ void generateString(string sentence, int depth)
 
     for (int i = 0; i < sentence.length(); i++) {
         if (sentence[i] == 'X') {
-            int choice = rand() % 3;
+            // nextSentence += "F-[[X]+X]+F[-FX]+X";
+            int choice = rand() % 4;
             if (choice == 0)
-                nextSentence += "F-[[X]+X]+F[+FX]-X";
+                nextSentence += "F-[[X]+X]+F[[X]+X]-X";
             else if (choice == 1)
+                nextSentence += "F-[[X]+X]+F[-FX]+X";
+            else if (choice == 2)
                 nextSentence += "F[+X][-X]FX";
-            else
+            else if (choice == 3)
                 nextSentence += "F[+X]F[-X]+X";
             continue;
         }
@@ -108,11 +107,13 @@ int main()
     glLoadIdentity();
     // glClearColor(0.6, 0.6, 0.6, 1);
     glClear(GL_COLOR_BUFFER_BIT);
-    glfwSwapInterval(0);
+    // glfwSwapInterval(0);
 
     string sentence = "X";
     int depth = 1;
     Turtle turtle;
+    int turnAngle = 22.5;//15 + rand() % 20;
+    int season = 0;
     // generateString(sentence, 6);
     // Render loop for the OpenGL window. The scene is redrawn on every refresh.
 
@@ -121,12 +122,13 @@ int main()
         if (depth < generations) {
             generateString(sentence, depth++);
         }
-        drawPattern(generatedString);
+        season++;
+        drawPattern(generatedString, turnAngle, season % 3);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-        usleep(0.25 * 1e6);
-        // sleep(1);
+        // usleep(0.25 * 1e6);
+        sleep(1);
         // for (long long i = 0; i < 200000000; i++);
     }
 

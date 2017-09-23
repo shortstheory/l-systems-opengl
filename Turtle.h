@@ -130,7 +130,7 @@ public:
     /// Draws a simple polygonal leaf consisting of a circle and three triangles.
     /// The leaf is drawn at the current state of the Turtle.
 
-    void drawLeaf()
+    void drawLeaf(int season)
     {
         graphics.setThickness(1); // Leaves are always of thickness 1
         uniform_real_distribution<> dis(0, 1);
@@ -139,7 +139,25 @@ public:
         float radian = rotation - PI/2;
 
         // graphics.setColor(make_tuple(dis(gen), dis(gen), dis(gen), 1));
-        graphics.setColor(make_tuple(dis(gen), dis(gen), 0, 1));
+        GLfloat green = 1;
+        GLfloat red = 0;
+        GLfloat blue = 0;
+        if (season == 0) {
+            green = dis(gen);
+            red = 0;
+        }
+        else if (season == 1) {
+            green = dis(gen);
+            red = dis(gen);
+        }
+        else if (season == 2) {
+            if (dis(gen) < 0.9)
+                return;
+            green = dis(gen)/2;
+            red = 0;
+            blue = 0;
+        }
+        graphics.setColor(make_tuple(red, green, blue, 1));
 
         graphics.drawCircle(x, y, rad);
 
