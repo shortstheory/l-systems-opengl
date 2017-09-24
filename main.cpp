@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <tuple>
+#include <unistd.h>
 
 #define PI 3.14159265
 #define SCREEN_WIDTH 1280
@@ -218,7 +219,7 @@ int main( void )
 
         drawLeaf(400, 350);
         // Swap front and back buffers
-        glfwSwapBuffers( window );
+        // glfwSwapBuffers( window );
 
         // Poll for and process events
         glfwPollEvents();

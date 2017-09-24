@@ -4,7 +4,7 @@
 #define WIDTH 800
 #define HEIGHT 800
 
-void drawPattern(string sentence, int turnAngle, int season)
+void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
 {
     Turtle turtle;
     float angle = (PI / 180) * turnAngle;
@@ -27,6 +27,8 @@ void drawPattern(string sentence, int turnAngle, int season)
         } else if (current == '-') {
             turtle.rotate(angle);
         } else if (current == '[') {
+            glfwSwapBuffers(window);
+            usleep(0.001 * 1e6);
             turtle.saveState();
             turtle.setThickness(0); // 0 corresponds to branch contraction
         } else if (current == ']') {
@@ -122,14 +124,11 @@ int main()
         if (depth < generations) {
             generateString(sentence, depth++);
         }
-        season++;
-        drawPattern(generatedString, turnAngle, season % 3);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
         // usleep(0.25 * 1e6);
         sleep(1);
-        // for (long long i = 0; i < 200000000; i++);
     }
 
     glfwDestroyWindow(window);
