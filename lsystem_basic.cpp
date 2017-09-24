@@ -124,6 +124,8 @@ int main()
         if (depth < generations) {
             generateString(sentence, depth++);
         }
+        season = (season + 1) % 3;
+        drawPattern(generatedString, turnAngle, season, window);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
