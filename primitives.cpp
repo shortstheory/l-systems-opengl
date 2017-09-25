@@ -190,6 +190,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
         demoPrimitiveDrawing();
         glfwSwapBuffers(window);
+        sleep(1);
         glfwPollEvents();
     }
 
