@@ -1,10 +1,11 @@
+/** @file */
 #include "turtle.h"
 #include <unistd.h>
 
 #define WIDTH 800
 #define HEIGHT 800
-#define animate 0
 
+const bool animate = false;
 string generatedString;
 
 /// Draw pattern given the generated l system string and other graphics parameters
@@ -62,7 +63,6 @@ void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
 void generateString(string sentence, int depth)
 {
     if(depth == 0) {
-        cout<<sentence;
         generatedString = sentence;
         return;
     }
@@ -89,7 +89,6 @@ void generateString(string sentence, int depth)
         }
         nextSentence += sentence[i];
     }
-    cout<<nextSentence<<depth<<endl;
     generateString(nextSentence, depth - 1);
 }
 

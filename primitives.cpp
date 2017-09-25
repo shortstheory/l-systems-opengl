@@ -1,4 +1,3 @@
-// #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <vector>
 #include <iostream>
@@ -8,8 +7,8 @@
 #include <unistd.h>
 
 #define PI 3.14159265
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 800
 
 void drawPixel(GLfloat x, GLfloat y)
 {
