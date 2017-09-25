@@ -32,12 +32,33 @@ The l-system we used is a **bracketed stochastic 0L-system**. What this means is
 * **Axiom:** "X"
 
 ## Turtle interpretation of symbols
-1. F  =  Move forward, drawing a line
-2. \+  =  Rotate head left by <angle>
-3. \-  =  Rotate head right by <angle>
-4. [  =  Save state of turtle (State: x, y, rotation, thickness)
-5. ]  =  Restore state of turtle
+1. `F`  =  Move forward, drawing a line
+2. `+`  =  Rotate head left by <angle>
+3. `-`  =  Rotate head right by <angle>
+4. `[`  =  Save state of turtle (State: x, y, rotation, thickness)
+5. `]`  =  Restore state of turtle
 
+## Other implementation details
+
+For drawing leaves, the terminal symbol `X` has been used along with the next symbol of the string. If the symbol `X` is encountered, with the following symbol as `[`, then a leaf is drawn.
+
+
+**Branch width contraction** occurs at every branching point in the tree.
+
+**Trunk tapering** is performed until the first branch is encountered, after which branch contraction is performed.
+
+Color of leaves is taken from a uniform random distribution, based on a variable used to denote season.
+
+* #### Summer/spring
+![summer/spring](Results/spring.png)
+
+* #### Autumn
+![autumn](Results/autumn.png)
+
+* #### Winter
+![winter](Results/winter.png)
+
+Every execution of the program leads to a slightly different tree structure due to the stochastic l-system, random angle of branching, and random leaf colors.
 
 # Requirements
 
