@@ -3,6 +3,7 @@
 
 #define WIDTH 800
 #define HEIGHT 800
+#define animate 0
 
 void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
 {
@@ -27,8 +28,10 @@ void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
         } else if (current == '-') {
             turtle.rotate(angle);
         } else if (current == '[') {
-            glfwSwapBuffers(window);
-            usleep(0.001 * 1e6);
+            if (animate) {
+                glfwSwapBuffers(window);
+                usleep(0.001 * 1e6);
+            }
             turtle.saveState();
             turtle.setThickness(0); // 0 corresponds to branch contraction
         } else if (current == ']') {
@@ -36,7 +39,6 @@ void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
             turtle.setThickness(0); // 0 corresponds to branch contraction
         } else if (current == 'X' && sentence[i + 1] != '[') {
             trunk = 0; // Stop tapering
-            // turtle.changeColor();
             turtle.drawLeaf(season);
         }
     }
@@ -107,16 +109,13 @@ int main()
     glOrtho(0, WIDTH, 0, HEIGHT, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    // glClearColor(0.6, 0.6, 0.6, 1);
     glClear(GL_COLOR_BUFFER_BIT);
-    // glfwSwapInterval(0);
 
     string sentence = "X";
     int depth = 1;
     Turtle turtle;
-    int turnAngle = 22.5;//15 + rand() % 20;
+    int turnAngle = 15 + rand() % 20;
     int season = 0;
-    // generateString(sentence, 6);
     // Render loop for the OpenGL window. The scene is redrawn on every refresh.
 
     while (!glfwWindowShouldClose(window)) {

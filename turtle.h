@@ -24,7 +24,7 @@ private:
 public:
 
     /// Default empty constructor for Turtle.
-    /// Initialises all values and sets the color to brown for drawing the tree trunk
+    /// Initialise all values and set the color to brown for drawing the tree trunk
 
     Turtle()
     {
@@ -40,20 +40,8 @@ public:
         gen.seed(rd());
     }
 
-    /// Colors in OpenGL range from 0 -> 1. Hence to change intensity, we have to map
-    /// the desired color to these values.
-
-    void changeColor()
-    {
-        GLfloat red = (float)(rand()%100) / (float)100;
-        GLfloat green = (float)(rand()%100) / (float)100;
-        GLfloat blue = (float)(rand()%100) / (float)100;
-        color = make_tuple(red, green, blue, 1);
-        graphics.setColor(color);
-    }
-
     /// As thicnkess of trunks/branches decreases as we go up the tree, we can decrement
-    /// it as we draw the tree. Sets the thickness for drawPixel(..)
+    /// it as we draw the tree. Set the thickness for drawPixel(..)
 
     void setThickness(int val = 0)
     {
@@ -68,7 +56,7 @@ public:
         graphics.setThickness(val);
     }
 
-    /// Simply move the Turtle to the desired co-ordinate on the viewport
+    /// Move the Turtle to the desired co-ordinate on the viewport
 
     void translate(int x_target, int y_target)
     {
@@ -94,7 +82,7 @@ public:
         // cout<<"reached "<<x<<", "<<y<<endl;
     }
 
-    /// Rotates the Turtle's pointer through an angle.
+    /// Rotate the Turtle's pointer through an angle.
 
     void rotate(float angle)
     {
@@ -110,8 +98,8 @@ public:
         states.push(make_tuple(x, y, rotation, thickness));
     }
 
-    /// Pops the last saved stack from the stack and sets the Turtle to that state
-    /// for future line drawing. Outputs an error message in case the stack is empty.
+    /// Pop the last saved stack from the stack and set the Turtle to that state
+    /// for future line drawing. Output an error message in case the stack is empty.
 
     void restoreState()
     {
@@ -127,7 +115,7 @@ public:
         thickness = get<3>(temp);
     }
 
-    /// Draws a simple polygonal leaf consisting of a circle and three triangles.
+    /// Draw a simple polygonal leaf consisting of a circle and three triangles.
     /// The leaf is drawn at the current state of the Turtle.
 
     void drawLeaf(int season)
@@ -138,24 +126,22 @@ public:
         int rad = 2;
         float radian = rotation - PI/2;
 
-        // graphics.setColor(make_tuple(dis(gen), dis(gen), dis(gen), 1));
         GLfloat green = 1;
         GLfloat red = 0;
         GLfloat blue = 0;
-        if (season == 0) {
+        if (season == 0) { // Summer/Spring
             green = dis(gen);
             red = 0;
         }
-        else if (season == 1) {
+        else if (season == 1) { // Autumn
             green = dis(gen);
             red = dis(gen);
         }
-        else if (season == 2) {
+        else if (season == 2) { // Winter
             if (dis(gen) < 0.9)
                 return;
             green = dis(gen)/2;
             red = 0;
-            blue = 0;
         }
         graphics.setColor(make_tuple(red, green, blue, 1));
 

@@ -24,7 +24,7 @@ private:
     int thickness;
     tuple<GLfloat, GLfloat, GLfloat, GLfloat> color;
 
-    /// Draws a pixel on the screen given parameters of co-ordinate wrt viewport,
+    /// Draw a pixel on the screen given parameters of co-ordinate wrt viewport,
     /// thickness of point, and color of pixel.
     ///
     /// Only called through other member functions.
@@ -49,7 +49,7 @@ private:
     /// A circle can be represented as a combination of eight arcs in four quadrants
     /// using cases of whether |y| > |x| to reduce calculations.
     ///
-    /// This takes circle parameters and draws it on the viewport using drawPixel(..).
+    /// Take circle parameters and draw it on the viewport using drawPixel(..).
     ///
     /// Called from drawCircle(..) which calculates the arc of the circle.
 
@@ -77,7 +77,7 @@ public:
         color = _color;
     }
 
-    /// Draws a line on the viewport given the starting point and ending point.
+    /// Draw a line on the viewport given the starting point and ending point.
     /// This function uses Bresenham's line drawing algorithm for rendering clearly
     /// and efficiently.
     ///
@@ -93,10 +93,10 @@ public:
         int dx = end_x - start_x;
         int dy = end_y - start_y;
 
-        //when line is steeper than 1
+        // When line is steeper than 1
         if (abs(dy) > abs(dx)) {
-            if (dy > 0) { //when line has m>1 && m<infinity
-                int p = -2*dx + dy; //initial delta
+            if (dy > 0) { // When line has m>1 && m<infinity
+                int p = -2*dx + dy; // Initial delta
                 int northDelta = -2*dx;
                 int northEastDelta = 2*dy - 2*dx;
                 for (int x = start_x, y = start_y; y<= end_y; y++) {
@@ -108,8 +108,8 @@ public:
                     }
                     drawPixel(x, y, thickness, color);
                 }
-            } else { //when it spills over to second quadrant, but still has abs(m) > 1
-                int p = 2*dx - dy; //initial delta
+            } else { // When it spills over to second quadrant, but still has abs(m) > 1
+                int p = 2*dx - dy; // Initial delta
                 int southDelta = 2*dx;
                 int southEastDelta = 2*(dy + dx);
                 for (int x = start_x, y = start_y; y >= end_y; y--) {
@@ -137,7 +137,7 @@ public:
                     drawPixel(x, y, thickness, color);
                 }
             } else {
-                int p = 2*dy + dx; //initial delta
+                int p = 2*dy + dx; // Initial delta
                 int eastDelta = 2*dy;
                 int southEastDelta = 2*(dy + dx);
                 for (int x = start_x, y = start_y; x<= end_x; x++) {
@@ -168,7 +168,7 @@ public:
         return make_pair(a, b);
     }
 
-    /// Takes the centre of the circle as x0, y0 values, and the radius of the circle.
+    /// Take the centre of the circle as x0, y0 values, and the radius of the circle.
     /// The circle is rendered using the mid-point algorithm.
 
     void drawCircle(int x0, int y0, int radius)
