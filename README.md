@@ -53,8 +53,8 @@ The l-system we used is a **bracketed stochastic 0L-system**. What this means is
 
 This project consists of the following files:
 
-* ```graphics.h``` - class containing primitivge (line and circle) drawing methods
-* ```turtle.h``` - class for implementing turtle like graphics for interpreting L-system generated code
+* ```graphics.h``` - class containing primitive (line and circle) drawing methods
+* ```turtle.h``` - class implementing turtle like graphics for interpreting L-system generated code
 * ```primitives.cpp``` - demonstrates the primitive drawing method by rendering a bicycle wheel
 * ```tree.cpp``` - procedurally generates a tree changing colours with the seasons using an L-system
 
@@ -69,6 +69,8 @@ cmake ..
 make
 ./tree
 ```
+
+To run the primitive drawing demonstration program, make sure your active directory is set to ```build/``` and run ```./primitives```.
 
 # Contributors
 
