@@ -5,6 +5,7 @@
 #define HEIGHT 800
 #define animate 0
 
+/// Draw pattern given the generated l system string and other graphics parameters
 void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
 {
     Turtle turtle;
