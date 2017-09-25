@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['translate',['translate',['../classTurtle.html#a1ac311827ae11900b6d0dd76304f72a5',1,'Turtle']]],
-  ['tree_2ecpp',['tree.cpp',['../tree_8cpp.html',1,'']]],
-  ['turtle',['Turtle',['../classTurtle.html',1,'Turtle'],['../classTurtle.html#a1610c37c2e750169f25b074e62db755d',1,'Turtle::Turtle()']]]
+  ['savestate',['saveState',['../classTurtle.html#abfdb07aa29fc62888d3f28cc68c951f4',1,'Turtle']]],
+  ['setangle',['setAngle',['../classTurtle.html#ace9c83560bdcb5c9480d017f000a724b',1,'Turtle']]],
+  ['setthickness',['setThickness',['../classTurtle.html#a1c169d579e98d34f812b3ef347913bf5',1,'Turtle']]]
 ];

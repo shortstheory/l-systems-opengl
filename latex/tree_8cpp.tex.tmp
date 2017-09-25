@@ -26,12 +26,12 @@ int {\bfseries main} ()\hypertarget{tree_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-const bool {\bfseries animate} = false\hypertarget{tree_8cpp_a0aa644363cb4a9d9050a2dbbac12b0bf}{}\label{tree_8cpp_a0aa644363cb4a9d9050a2dbbac12b0bf}
+const bool \hyperlink{tree_8cpp_a0aa644363cb4a9d9050a2dbbac12b0bf}{animate} = false\hypertarget{tree_8cpp_a0aa644363cb4a9d9050a2dbbac12b0bf}{}\label{tree_8cpp_a0aa644363cb4a9d9050a2dbbac12b0bf}
 
-\item 
-string \hyperlink{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}{generated\+String}\hypertarget{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}{}\label{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}
+\begin{DoxyCompactList}\small\item\em animate the drawing of each branch \end{DoxyCompactList}\item 
+string {\bfseries generated\+String}\hypertarget{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}{}\label{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}
 
-\begin{DoxyCompactList}\small\item\em animate the drawing of each branch \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}

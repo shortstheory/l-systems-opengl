@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['savestate',['saveState',['../classTurtle.html#abfdb07aa29fc62888d3f28cc68c951f4',1,'Turtle']]],
-  ['setangle',['setAngle',['../classTurtle.html#ace9c83560bdcb5c9480d017f000a724b',1,'Turtle']]],
-  ['setthickness',['setThickness',['../classTurtle.html#a1c169d579e98d34f812b3ef347913bf5',1,'Turtle']]]
+  ['restorestate',['restoreState',['../classTurtle.html#ad96aa7929b2421e3b30ebb76b2295880',1,'Turtle']]],
+  ['rotate',['rotate',['../classTurtle.html#a4f667fe3bee778bb6d37071f0bcabd34',1,'Turtle']]]
 ];

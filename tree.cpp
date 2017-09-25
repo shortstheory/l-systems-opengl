@@ -5,7 +5,8 @@
 #define WIDTH 800
 #define HEIGHT 800
 
-const bool animate = false; /// animate the drawing of each branch
+/// animate the drawing of each branch
+const bool animate = false;
 
 string generatedString;
 
