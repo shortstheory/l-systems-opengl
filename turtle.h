@@ -3,7 +3,7 @@
 
 #include "graphics.h"
 
-/// Turle-like graphics for interpreting l system generated code
+/// Turtle-like graphics for interpreting l system generated code
 class Turtle
 {
 private:
