@@ -5,6 +5,13 @@
 #define HEIGHT 800
 #define animate 0
 
+string generatedString;
+
+/// Draw pattern given the generated l system string and other graphics parameters
+/// Parameters: string sentence : Generated l system string
+/// int turnAngle : Interpret + and - with this angle
+/// GLFWwindow * window: Pointer to window (for animation)
+
 void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
 {
     Turtle turtle;
@@ -44,7 +51,13 @@ void drawPattern(string sentence, int turnAngle, int season, GLFWwindow* window)
     }
 }
 
-string generatedString;
+
+/// Given an axiom, use defined production rules to recursively generate a string.
+/// Stores generated string in global variable `generatedString`
+/// Implementation of an l system using context-free grammar.
+/// Parameters:
+/// string sentence : String generated until preveious recursive step (initially the axiom)
+/// int depth : Depth of recursion for generating string
 
 void generateString(string sentence, int depth)
 {
