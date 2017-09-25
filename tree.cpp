@@ -1,4 +1,4 @@
-#include "Turtle.h"
+#include "turtle.h"
 #include <unistd.h>
 
 #define WIDTH 800

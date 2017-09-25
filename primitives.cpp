@@ -175,7 +175,6 @@ void drawLeaf(int origin_x, int origin_y, float angle = 0.0)
 int main( void )
 {
     GLFWwindow *window;
-
     // Initialize the library
     if (!glfwInit()) {
         return -1;
@@ -219,7 +218,7 @@ int main( void )
 
         drawLeaf(400, 350);
         // Swap front and back buffers
-        // glfwSwapBuffers( window );
+        glfwSwapBuffers( window );
 
         // Poll for and process events
         glfwPollEvents();

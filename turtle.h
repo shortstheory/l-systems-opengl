@@ -1,7 +1,7 @@
 #ifndef TURTLE_H
 #define TURTLE_H
 
-#include "Graphics.h"
+#include "graphics.h"
 
 class Turtle
 {
