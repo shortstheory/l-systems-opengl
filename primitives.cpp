@@ -11,11 +11,6 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
-GLfloat pointVertex[1000][2];
-GLfloat r = 0.5;
-GLfloat g = 0.5;
-GLfloat b = 0.5;
-// const std::tuple<GLfloat, GLfloat, GLfloat> myTuple = std::make_tuple<r,g,b>;
 void drawPixel(GLfloat x, GLfloat y)
 {
     GLfloat pointVertex[] = {x, y};
@@ -27,16 +22,16 @@ void drawPixel(GLfloat x, GLfloat y)
 
     glColorPointer(3, GL_FLOAT, 0, color_vector);
 
-    glEnable(GL_POINT_SMOOTH); // make the point circular
-    glEnableClientState(GL_VERTEX_ARRAY); // tell OpenGL that you're using a vertex array for fixed-function attribute
-    glPointSize(2); // must be added before glDrawArrays is called
-    glVertexPointer(2, GL_FLOAT, 0, pointVertex); // point to the vertices to be used
-    glDrawArrays(GL_POINTS, 0, 1); // draw the vertixes
-    glDisableClientState(GL_VERTEX_ARRAY); // tell OpenGL that you're finished using the vertex arrayattribute
-    glDisable(GL_POINT_SMOOTH); // stop the smoothing to make the points circular
+    glEnable(GL_POINT_SMOOTH);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glPointSize(2);
+    glVertexPointer(2, GL_FLOAT, 0, pointVertex);
+    glDrawArrays(GL_POINTS, 0, 1);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisable(GL_POINT_SMOOTH);
 }
 
-void drawLine(GLfloat start_x, GLfloat start_y, GLfloat end_x, GLfloat end_y) // we have to take care of too many cases :P
+void drawLine(GLfloat start_x, GLfloat start_y, GLfloat end_x, GLfloat end_y)
 {
     if (start_x > end_x) {
         std::swap(start_x, end_x);
@@ -124,7 +119,7 @@ void drawCirclePixel(int x, int y, int origin_x, int origin_y)
 
 }
 
-void drawCircle(int radius, int origin_x, int origin_y)
+void drawCircle(int origin_x, int origin_y, int radius)
 {
     int x = 0;
     int y = radius;
@@ -150,29 +145,20 @@ void drawCircle(int radius, int origin_x, int origin_y)
     }
 }
 
-void drawLeaf(int origin_x, int origin_y, float angle = 0.0)
+void demoPrimitiveDrawing()
 {
-    // int xDelta = 5;
-    int yDelta = 40;
-    int rad = 20;
-
-    float radian = PI/180*angle;
-
-    drawCircle(rad, origin_x, origin_y);
-
-    float piDiv = 2;
-    // //top
-    drawLine(origin_x - (rad)*cos(radian), origin_y + rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
-    drawLine(origin_x + rad*cos(radian), origin_y - rad*sin(radian), origin_x + yDelta*sin(radian), origin_y + yDelta*cos(radian));
-
-    drawLine(origin_x - (rad)*cos(radian+PI/piDiv), origin_y + rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
-    drawLine(origin_x + rad*cos(radian+PI/piDiv), origin_y - rad*sin(radian+PI/piDiv), origin_x + yDelta*sin(radian+PI/piDiv), origin_y + yDelta*cos(radian+PI/piDiv));
-
-    drawLine(origin_x - (rad)*cos(radian-PI/piDiv), origin_y + rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
-    drawLine(origin_x + rad*cos(radian-PI/piDiv), origin_y - rad*sin(radian-PI/piDiv), origin_x + yDelta*sin(radian-PI/piDiv), origin_y + yDelta*cos(radian-PI/piDiv));
+    float x = 0; float y = 0;
+    float radius = 200;
+    for (int deg = 0; deg < 360; deg+=10) {
+        x = radius*cos(deg*PI/180);
+        y = radius*sin(deg*PI/180);
+        drawLine(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, x+SCREEN_WIDTH/2, y+SCREEN_HEIGHT/2);
+    }
+    drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 200);
+    drawCircle(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 220);
 }
 
-int main( void )
+int main()
 {
     GLFWwindow *window;
     // Initialize the library
@@ -181,46 +167,29 @@ int main( void )
     }
 
     // Create a windowed mode window and its OpenGL context
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "IS F311 Computer Graphics Assignment", NULL, NULL);
 
     if (!window) {
         glfwTerminate();
         return -1;
     }
 
-    // Make the window's context current
+    // Make the window's context
     glfwMakeContextCurrent(window);
 
-    glViewport(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT); // specifies the part of the window to which OpenGL will draw (in pixels), convert from normalised to pixels
-    glMatrixMode(GL_PROJECTION); // projection matrix defines the properties of the camera that views the objects in the world coordinate frame. Here you typically set the zoom factor, aspect ratio and the near and far clipping planes
-    glLoadIdentity(); // replace the current matrix with the identity matrix and starts us a fresh because matrix transforms such as glOrpho and glRotate cumulate, basically puts us at (0, 0, 0)
+    glViewport(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
     glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1); // essentially set coordinate system
-    glMatrixMode(GL_MODELVIEW); // (default matrix mode) modelview matrix defines how your objects are transformed (meaning translation, rotation and scaling) in your world
-    glLoadIdentity(); // same as above comment
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
 
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window)) {
         glClear(GL_COLOR_BUFFER_BIT);
-        // drawLine(200, 200, 200, 600);
-        // drawLine(200, 200, 300, 500);
-        //
-        // drawLine(300, 600, 350, 200);
-        // // drawLine(200, 200, 400, 200);
-        // //
-        // // drawLine(200, 200, 400, 300);
-        // // drawLine(200, 200, 400, 500);
-        // //
-        // // drawLine(0, 400, 200, 200);
-        // //
-        // drawPixel(300, 400);
-        // drawCircle(200, 300, 400);
-
-        drawLeaf(400, 350);
-        // Swap front and back buffers
-        glfwSwapBuffers( window );
-
-        // Poll for and process events
+        demoPrimitiveDrawing();
+        glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
