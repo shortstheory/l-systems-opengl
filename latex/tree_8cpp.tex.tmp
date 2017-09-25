@@ -1,0 +1,56 @@
+\hypertarget{tree_8cpp}{}\section{tree.\+cpp File Reference}
+\label{tree_8cpp}\index{tree.\+cpp@{tree.\+cpp}}
+{\ttfamily \#include \char`\"{}turtle.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$unistd.\+h$>$}\\*
+Include dependency graph for tree.\+cpp\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries W\+I\+D\+TH}~800\hypertarget{tree_8cpp_a241aeeb764887ae5e3de58b98f04b16d}{}\label{tree_8cpp_a241aeeb764887ae5e3de58b98f04b16d}
+
+\item 
+\#define {\bfseries H\+E\+I\+G\+HT}~800\hypertarget{tree_8cpp_aed89bd71aee8be823e8a20ec4e093c1e}{}\label{tree_8cpp_aed89bd71aee8be823e8a20ec4e093c1e}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{tree_8cpp_a2177c2611a4bfaaf9518ec262de3c1bf}{draw\+Pattern} (string sentence, int turn\+Angle, int season, G\+L\+F\+Wwindow $\ast$window)
+\item 
+void \hyperlink{tree_8cpp_aafbb55afd645000746450dc1c0b4107b}{generate\+String} (string sentence, int depth)
+\item 
+int {\bfseries main} ()\hypertarget{tree_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{tree_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const bool {\bfseries animate} = false\hypertarget{tree_8cpp_a0aa644363cb4a9d9050a2dbbac12b0bf}{}\label{tree_8cpp_a0aa644363cb4a9d9050a2dbbac12b0bf}
+
+\item 
+string \hyperlink{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}{generated\+String}\hypertarget{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}{}\label{tree_8cpp_a84664d58c99f2f8f0d0fe749373e701d}
+
+\begin{DoxyCompactList}\small\item\em animate the drawing of each branch \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tree.\+cpp@{tree.\+cpp}!draw\+Pattern@{draw\+Pattern}}
+\index{draw\+Pattern@{draw\+Pattern}!tree.\+cpp@{tree.\+cpp}}
+\subsubsection[{\texorpdfstring{draw\+Pattern(string sentence, int turn\+Angle, int season, G\+L\+F\+Wwindow $\ast$window)}{drawPattern(string sentence, int turnAngle, int season, GLFWwindow *window)}}]{\setlength{\rightskip}{0pt plus 5cm}void draw\+Pattern (
+\begin{DoxyParamCaption}
+\item[{string}]{sentence, }
+\item[{int}]{turn\+Angle, }
+\item[{int}]{season, }
+\item[{G\+L\+F\+Wwindow $\ast$}]{window}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8cpp_a2177c2611a4bfaaf9518ec262de3c1bf}{}\label{tree_8cpp_a2177c2611a4bfaaf9518ec262de3c1bf}
+Draw pattern given the generated l system string and other graphics parameters Parameters\+: string sentence \+: Generated l system string int turn\+Angle \+: Interpret + and -\/ with this angle G\+L\+F\+Wwindow $\ast$ window\+: Pointer to window (for animation) \index{tree.\+cpp@{tree.\+cpp}!generate\+String@{generate\+String}}
+\index{generate\+String@{generate\+String}!tree.\+cpp@{tree.\+cpp}}
+\subsubsection[{\texorpdfstring{generate\+String(string sentence, int depth)}{generateString(string sentence, int depth)}}]{\setlength{\rightskip}{0pt plus 5cm}void generate\+String (
+\begin{DoxyParamCaption}
+\item[{string}]{sentence, }
+\item[{int}]{depth}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8cpp_aafbb55afd645000746450dc1c0b4107b}{}\label{tree_8cpp_aafbb55afd645000746450dc1c0b4107b}
+Given an axiom, use defined production rules to recursively generate a string. Stores generated string in global variable {\ttfamily generated\+String} Implementation of an l system using context-\/free grammar. Parameters\+: string sentence \+: String generated until preveious recursive step (initially the axiom) int depth \+: Depth of recursion for generating string 

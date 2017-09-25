@@ -5,7 +5,8 @@
 #define WIDTH 800
 #define HEIGHT 800
 
-const bool animate = false;
+const bool animate = false; /// animate the drawing of each branch
+
 string generatedString;
 
 /// Draw pattern given the generated l system string and other graphics parameters
